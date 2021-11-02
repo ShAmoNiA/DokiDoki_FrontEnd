@@ -1,0 +1,21 @@
+body {
+  background: rgb(3, 0, 36);
+  background: linear-gradient(
+    70deg,
+    rgba(3, 0, 36, 1) 0%,
+    rgba(97, 9, 121, 1) 34%,
+    rgba(0, 115, 255, 1) 100%
+  );
+
+  --twitter-color: rgba(97, 9, 121, 1);
+  --twitter-background: #eeeeee;
+}
+
+.app {
+  display: flex;
+  height: 100vh;
+  max-width: 1300px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 10px;
+}
