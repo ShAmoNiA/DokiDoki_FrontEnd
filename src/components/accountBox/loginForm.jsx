@@ -101,7 +101,7 @@ export function LoginForm(props) {
       <Marginer direction="vertical" margin="1em" />
       <MutedLink>
         Don't have an account?
-        <BoldLink href="#" onClick={switchToSignup}>
+        <BoldLink style={{ cursor: "pointer" }} onClick={switchToSignup}>
           Sign up
         </BoldLink>
       </MutedLink>

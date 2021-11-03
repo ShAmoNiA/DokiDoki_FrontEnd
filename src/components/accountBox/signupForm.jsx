@@ -345,7 +345,9 @@ export function SignupForm(props) {
     return (
       <>
         <div
-          onClick={() => setRole(1)}
+          onClick={() => {
+            if (!loading) setRole(1);
+          }}
           onMouseEnter={() => {
             setRoleUnderMouse(1);
           }}
@@ -378,7 +380,9 @@ export function SignupForm(props) {
           {DoctorIcon({ fill: doctorColor })}
         </div>
         <div
-          onClick={() => setRole(2)}
+          onClick={() => {
+            if (!loading) setRole(2);
+          }}
           style={{
             height: "100%",
             marginLeft: 4,
@@ -531,7 +535,7 @@ export function SignupForm(props) {
       <Marginer direction="vertical" margin="1em" />
       <MutedLink>
         Already have an account?
-        <BoldLink href="#" onClick={switchToSignin}>
+        <BoldLink style={{ cursor: "pointer" }} onClick={switchToSignin}>
           Sign In
         </BoldLink>
       </MutedLink>

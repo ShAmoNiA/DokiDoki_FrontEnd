@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./Login.css";
 import styled from "styled-components";
 import { AccountBox } from "../../components/accountBox/index";
+import { useHistory } from "react-router-dom";
 
 const AppContainer = styled.div`
   width: 100%;
