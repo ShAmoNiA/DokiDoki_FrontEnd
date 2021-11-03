@@ -4,7 +4,7 @@ import React from "react";
 // import Widgets from "./Widgets";
 // import Profile from "./Profile";
 import "./App.css";
-import Login from "./Login";
+import Login from "./screens/Login/Login";
 import axios from "axios";
 // import Search from "./Search";
 import {
@@ -40,7 +40,9 @@ class App extends Component {
           <Switch>
             <Route path="/" exact>
               {this.state.isAuth ? (
-                {/* <Feed myId={this.state.user.id} /> */}
+                {
+                  /* <Feed myId={this.state.user.id} /> */
+                }
               ) : (
                 <Redirect to="/login" />
               )}

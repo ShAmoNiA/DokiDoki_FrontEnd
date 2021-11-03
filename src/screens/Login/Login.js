@@ -1,7 +1,7 @@
-import React, { Component }  from 'react';
+import React, { Component } from "react";
 import "./Login.css";
 import styled from "styled-components";
-import { AccountBox } from "./components/accountBox";
+import { AccountBox } from "../../components/accountBox";
 
 const AppContainer = styled.div`
   width: 100%;
