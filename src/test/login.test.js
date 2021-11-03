@@ -2,10 +2,12 @@ import axios from "axios";
 
 const loginFunction = async () => {
 	return await axios.post("http://185.141.107.81:1111/api/login", {
-		username: "test",
-		password: "testtest"
-	});
+    username: "ahmadrezadl",
+    password: "hardpassword",
+  });
 }
+
+//http://185.141.107.81:1111/api/login
 
 describe("Login", () => {
 	test("trying to login to the application with provided credentials", async () => {

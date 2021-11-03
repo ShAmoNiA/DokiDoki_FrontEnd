@@ -21,17 +21,18 @@ class App extends Component {
     this.state = { isAuth: false, user: {} };
   }
 
-  componentDidMount() {
-    axios
-      .get("http://185.141.107.81:1111/api/login", {
-        headers: { Authorization: document.cookie.slice(14) },
-      })
-      .then((res) => {
-        if (res.data.status == "true") {
-          this.setState({ isAuth: true, user: res.data });
-        }
-      });
-  }
+  // componentDidMount() {
+  //   axios
+  //     .get("http://185.141.107.81:1111/api/login", {
+  //       headers: { Authorization: document.cookie.slice(14) },
+  //     })
+  //     .then((res) => {
+  //       if (res.data.status == "true") {
+  //         this.setState({ isAuth: true, user: res.data });
+  //       }
+  //     });
+  // }
+
   render() {
     return (
       <div className="app">

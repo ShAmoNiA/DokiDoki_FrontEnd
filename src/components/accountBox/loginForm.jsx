@@ -43,7 +43,7 @@ export function LoginForm(props) {
 
     const url = "http://185.141.107.81:1111/api/login";
       const formData = new FormData();
-      formData.append("usernameormail", email);
+      formData.append("username", email);
       formData.append("password", password);
     const config = {
       headers: {
