@@ -1,7 +1,12 @@
 import React from "react";
+// import Sidebar from "./Sidebar";
+// import Feed from "./Feed";
+// import Widgets from "./Widgets";
+// import Profile from "./Profile";
 import "./App.css";
 import Login from "./screens/Login/Login";
 import axios from "axios";
+// import Search from "./Search";
 import {
   HashRouter as Router,
   Switch,
@@ -10,6 +15,7 @@ import {
   useHistory,
 } from "react-router-dom";
 import { Component } from "react";
+
 
 const App = () => {
   return (

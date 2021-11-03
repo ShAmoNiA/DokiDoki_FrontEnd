@@ -1,10 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { LoginForm } from "./loginForm";
 import { SignupForm } from "./signupForm";
-import SignupSuccessForm from "./signupSuccessForm";
-
 import { motion } from "framer-motion";
 import { AccountContext } from "./accountContext";
 
@@ -40,13 +37,14 @@ const BackDrop = styled(motion.div)`
   flex-direction: column;
   border-radius: 50%;
   transform: rotate(60deg);
+  top: -210px;
   left: -70px;
-  background: rgb(3, 0, 36);
+  background: rgb(3,0,36);
   background: linear-gradient(
     70deg,
-    rgba(3, 0, 36, 1) 0%,
-    rgba(97, 9, 121, 1) 34%,
-    rgba(0, 115, 255, 1) 100%
+     rgba(3,0,36,1) 0%, 
+     rgba(97,9,121,1) 34%, 
+     rgba(0,115,255,1) 100%
   );
 `;
 
@@ -78,6 +76,7 @@ const InnerContainer = styled.div`
   width: 218px;
   display: flex;
   flex-direction: column;
+  margin-top: 70px;
   margin-left: 35px;
 `;
 
@@ -104,13 +103,7 @@ const expandingTransition = {
 
 export function AccountBox(props) {
   const [isExpanded, setExpanded] = useState(false);
-  const [active, setActive] = useState(props.type);
-
-  const history = useHistory();
-
-  useEffect(() => {
-    setActive(props.type);
-  }, [props]);
+  const [active, setActive] = useState("signin");
 
   const playExpandingAnimation = () => {
     setExpanded(true);
@@ -122,54 +115,28 @@ export function AccountBox(props) {
   const switchToSignup = () => {
     playExpandingAnimation();
     setTimeout(() => {
-      history.replace("/signup");
+      setActive("signup");
     }, 400);
   };
 
   const switchToSignin = () => {
     playExpandingAnimation();
     setTimeout(() => {
-      history.replace("/login");
+      setActive("signin");
     }, 400);
   };
 
-  const switchToSignUpSuccess = () => {
-    playExpandingAnimation();
-    setTimeout(() => {
-      setActive("success");
-    }, 400);
-  };
-
-  const contextValue = {
-    switchToSignup,
-    switchToSignin,
-    switchToSignUpSuccess,
-  };
-
-  var BackDropStyle = {};
-  var InnerContainerStyle = {};
-  var TopContainerStyle = {};
-  if (active === "signin") {
-    BackDropStyle = { top: "-210px" };
-    InnerContainerStyle = { marginTop: "70px" };
-  } else if (active === "signup") {
-    BackDropStyle = { top: "-390px" };
-    InnerContainerStyle = { marginBottom: 16 };
-    TopContainerStyle = { height: 130 };
-  } else if (active === "success") {
-    BackDropStyle = { top: "-280px" };
-  }
+  const contextValue = { switchToSignup, switchToSignin };
 
   return (
     <AccountContext.Provider value={contextValue}>
       <BoxContainer>
-        <TopContainer style={TopContainerStyle}>
+        <TopContainer>
           <BackDrop
             initial={false}
             animate={isExpanded ? "expanded" : "collapsed"}
             variants={backdropVariants}
             transition={expandingTransition}
-            style={BackDropStyle}
           />
           {active === "signin" && (
             <HeaderContainer>
@@ -179,23 +146,16 @@ export function AccountBox(props) {
             </HeaderContainer>
           )}
           {active === "signup" && (
-            <HeaderContainer style={{ marginBottom: -45 }}>
+            <HeaderContainer>
               <HeaderText>Create</HeaderText>
               <HeaderText>Account</HeaderText>
               <SmallText>Please sign-up to continue!</SmallText>
             </HeaderContainer>
           )}
-          {active === "success" && (
-            <HeaderContainer style={{ marginBottom: 50 }}>
-              <HeaderText>Account</HeaderText>
-              <HeaderText>Created</HeaderText>
-            </HeaderContainer>
-          )}
         </TopContainer>
-        <InnerContainer style={InnerContainerStyle}>
+        <InnerContainer>
           {active === "signin" && <LoginForm />}
           {active === "signup" && <SignupForm />}
-          {active === "success" && <SignupSuccessForm />}
         </InnerContainer>
       </BoxContainer>
     </AccountContext.Provider>

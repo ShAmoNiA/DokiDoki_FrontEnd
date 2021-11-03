@@ -1,7 +1,7 @@
-import React from "react";
-import { Snackbar, SnackbarContent, Button } from "@material-ui/core";
-import CloseRoundedIcon from "@material-ui/icons/CloseRounded";
-import "./snackBar.css";
+import React from 'react'
+import { Snackbar, SnackbarContent, Button } from '@material-ui/core'
+import CloseRoundedIcon from '@material-ui/icons/CloseRounded'
+import '../../style/snackBar.css'
 
 class SnackBar extends React.Component {
   state = {
@@ -42,4 +42,5 @@ class SnackBar extends React.Component {
   }
 }
 
-export default SnackBar;
+export default SnackBar
+
