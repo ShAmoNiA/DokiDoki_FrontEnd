@@ -3,10 +3,10 @@ import React from "react";
 // import Feed from "./Feed";
 // import Widgets from "./Widgets";
 // import Profile from "./Profile";
+// import Search from "./Search";
 import "./App.css";
 import Login from "./Login";
 import axios from "axios";
-// import Search from "./Search";
 import {
   BrowserRouter as Router,
   Switch,

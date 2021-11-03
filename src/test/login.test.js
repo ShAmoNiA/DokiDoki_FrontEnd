@@ -6,7 +6,6 @@ const loginFunction = async () => {
     password: "hardpassword",
   });
 }
-
 //http://185.141.107.81:1111/api/login
 
 describe("Login", () => {
