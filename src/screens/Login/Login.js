@@ -3,7 +3,6 @@ import "./Login.css";
 import styled from "styled-components";
 
 import { AccountBox } from "../../components/accountBox/index";
-import { useHistory } from "react-router-dom";
 
 const AppContainer = styled.div`
   width: 100%;
@@ -14,13 +13,14 @@ const AppContainer = styled.div`
   justify-content: center;
 `;
 
-function Login() {
+function Login(props) {
   return (
     <AppContainer>
-      <AccountBox />
+      <AccountBox {...props} />
     </AppContainer>
   );
 }
+
 export function sum(a, b) {
   return a + b;
 }
