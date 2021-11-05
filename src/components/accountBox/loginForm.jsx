@@ -52,11 +52,9 @@ export function LoginForm(props) {
     setLoading(true);
 
     axios.post(url, formData, config).then((res) => {
-      console.log(res);
       if (res.data.status == "success") {
         document.cookie = `Authorization=${res.data.token}`;
         snkbr.current.openSnackbar(res.data.message, "hi");
-        console.log("loged in");
         setLoading(false);
         setTimeout(() => {
           window.location.href = "/";

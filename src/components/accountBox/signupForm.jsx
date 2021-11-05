@@ -107,10 +107,6 @@ export function SignupForm(props) {
       setDisableSignUp(false);
   }, [password, confirmPassword, email, phone, fullName, username]);
 
-  console.log(loading);
-  console.log(disableSignUp);
-  console.log(role);
-
   const SignUp = () => {
     setLoading(true);
     SignUpRequest({
@@ -127,7 +123,6 @@ export function SignupForm(props) {
             "error"
           );
           setLoading(false);
-          console.log(data);
         } else if (data.data.success === false) {
           var str = [];
           str = Object.values(data.data.message);
