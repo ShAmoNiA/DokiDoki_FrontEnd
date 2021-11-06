@@ -8,6 +8,13 @@ export const BoxContainer = styled.div`
   margin-top: 10px;
 `;
 
+export const SmallText = styled.p`
+  color: #fff;
+  font-weight: 500;
+  font-size: 11px;
+  z-index: 10;
+`;
+
 export const FormContainer = styled.form`
   width: 100%;
   display: flex;
@@ -31,7 +38,7 @@ export const BoldLink = styled.a`
 `;
 
 export const Input = styled.input`
-  width: 100%;
+  width: 106%;
   height: 42px;
   outline: none;
   border: 1px solid rgba(200, 200, 200, 0.3);
@@ -83,11 +90,4 @@ export const SubmitButton = styled.button`
     outline: none;
     border: none;
   }
-`;
-
-export const SmallText = styled.p`
-  color: #fff;
-  font-weight: 500;
-  font-size: 11px;
-  z-index: 10;
 `;

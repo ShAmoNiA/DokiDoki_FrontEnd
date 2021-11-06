@@ -179,7 +179,7 @@ export function AccountBox(props) {
             </HeaderContainer>
           )}
           {active === "signup" && (
-            <HeaderContainer style={{ marginBottom: -45 }}>
+            <HeaderContainer style={{ marginBottom: -20 }}>
               <HeaderText>Create</HeaderText>
               <HeaderText>Account</HeaderText>
               <SmallText>Please sign-up to continue!</SmallText>

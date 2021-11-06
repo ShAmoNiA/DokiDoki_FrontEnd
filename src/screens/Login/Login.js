@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./Login.css";
 import styled from "styled-components";
+
 import { AccountBox } from "../../components/accountBox/index";
 
 const AppContainer = styled.div`
@@ -20,4 +21,7 @@ function Login(props) {
   );
 }
 
+export function sum(a, b) {
+  return a + b;
+}
 export default Login;

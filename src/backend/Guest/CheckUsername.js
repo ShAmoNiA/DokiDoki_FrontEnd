@@ -2,13 +2,16 @@ import React from "react";
 import MainAxiosRequest from "../MainAxiosRequest";
 
 const CheckUsernameRequest = async ({ username, datacaller }) => {
+  const url = "check_username/" + username;
   await MainAxiosRequest()
-    .get("check_username/" + username)
+    .get(url)
     .then((data) => {
       datacaller(data.data.exists);
+      console.log(data);
     })
-    .catch(() => {
+    .catch((data) => {
       datacaller(false);
+      console.log(data);
     });
 };
 

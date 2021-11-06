@@ -9,18 +9,18 @@ import {
   MutedLink,
   SubmitButton,
 } from "./common";
+import Loading from "../../Loading";
 import { Marginer } from "../marginer";
 import { AccountContext } from "./accountContext";
-import SnackBar from "./../snackBar/SnackBar";
+import SnackBar from "./SnackBar";
 import axios from "axios";
+import { Redirect } from "react-router-dom";
 export function LoginForm(props) {
   const { switchToSignup } = useContext(AccountContext);
   const snkbr = useRef();
   const [password, setPassword] = useState(0);
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
-
-  /*
 
   async function login() {
     var token = "";
@@ -40,9 +40,9 @@ export function LoginForm(props) {
         "error"
       );
 
-    const url = "http://pazapp.ir/account/login";
+    const url = "http://185.141.107.81:1111/api/login";
     const formData = new FormData();
-    formData.append("usernameormail", email);
+    formData.append("username", email);
     formData.append("password", password);
     const config = {
       headers: {
@@ -69,8 +69,6 @@ export function LoginForm(props) {
     });
   }
 
-  */
-
   return (
     <BoxContainer>
       <SnackBar ref={snkbr} />
@@ -89,19 +87,13 @@ export function LoginForm(props) {
       <Marginer direction="vertical" margin={12} />
       <MutedLink href="#">Forget your password?</MutedLink>
       <Marginer direction="vertical" margin="1.5em" />
-      <SubmitButton
-        type="submit"
-        onClick={() => {
-          //login()
-        }}
-        disabled={loading}
-      >
-        {loading ? "loading" : "Sign in"}
+      <SubmitButton type="submit" onClick={login} disabled={loading}>
+        {loading ? <Loading /> : "Sign in"}
       </SubmitButton>
       <Marginer direction="vertical" margin="1em" />
       <MutedLink>
         Don't have an account?
-        <BoldLink href="#" onClick={switchToSignup}>
+        <BoldLink style={{ cursor: "pointer" }} onClick={switchToSignup}>
           Sign up
         </BoldLink>
       </MutedLink>
