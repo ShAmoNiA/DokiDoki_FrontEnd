@@ -1,8 +1,5 @@
-
 # DokiDoki_ForntEnd
 
 Version1 => sing-in and sign-up features
-signup => sign-up feature created
 
-merging login into sign up
-
+** Version2 => setting menu, profile (both doctor and patient, both preview and edit) and search bar features. also some tests for signup, login, etc. **
