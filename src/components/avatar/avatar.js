@@ -1,14 +1,18 @@
 import { Avatar, colors, IconButton, Slider, Tooltip } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useCallback } from "react";
 import Cropper from "react-easy-crop";
 import { Redirect } from "react-router";
 import { CameraIcon, LoadingGif, RotatePicture } from "../../asset/svgIcons";
+import EditProfilePictureRequest from "../../backend/User/Profile/editProfilePicture";
+import GetProfilePictureRequest from "../../backend/User/Profile/getProfilePicture";
+import UploadImageRequest from "../../backend/User/uploadImage";
 import { MainColors } from "../../config";
-import MainIconButton from "../baseComponents/iconButton";
 import getCroppedImg from "./getOutPut";
 
 const bottomOptionsHeight = 70;
+
+const avatarZoomOptions = { min: 1, max: 3, step: 0.25 };
 
 const MainAvatar = ({ style, size }) => {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
@@ -23,10 +27,69 @@ const MainAvatar = ({ style, size }) => {
 
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
 
+  const [reloadProfilePicture, setReloadProfilePicture] = useState(0);
+
+  const [profilePicture, setProfilePicture] = useState("");
+
   //نتيجه نهايي به صورت
   //blob
   // لينکش تو اين متغير ذخيره ميشه
   const [croppedImage, setCroppedImage] = useState(null);
+
+  useEffect(() => {
+    if (croppedImage !== null) {
+      UploadImageRequest({
+        image: croppedImage,
+        datacaller: GetImageUrlFromServer,
+      });
+    }
+  }, [croppedImage]);
+
+  useEffect(() => {
+    console.log(
+      "profile picture must be gotten from server instead of this log"
+    );
+    GetProfilePictureRequest({ datacaller: GetPrfolePictureFromServer });
+  }, [reloadProfilePicture]);
+
+  const GetImageUrlFromServer = ({ image_url, error }) => {
+    if (error) {
+      console.log("error in sending picture to server");
+    } else {
+      setActivePart("loading");
+      console.log(image_url);
+
+      // اینجا باید به سرور پاس بدیم
+      // اطلاعاتی که میگیریم رو و پروفایل رو تعییر بدیم
+      // بعد از تغییر عکس پروفایل
+      // لودینگ رو تموم میکنیم
+      // و به بخش
+      // avatar
+      // تغییر میدیم
+      // و تصویر اواتار رو عوض میکنیم
+      // در شروع باید یک عکس پروفایل بگیریم
+      EditProfilePictureRequest({
+        profile_picture_url: image_url,
+        datacaller: GetEditProfilePictureResponseFromServer,
+      });
+    }
+  };
+
+  const GetEditProfilePictureResponseFromServer = (data) => {
+    if (data.error) {
+      console.log("error in changing profile url");
+    } else {
+      setReloadProfilePicture(reloadProfilePicture + 1);
+    }
+  };
+
+  const GetPrfolePictureFromServer = (data) => {
+    if (data.error) {
+      console.log("error in getting prfoile picture from server");
+    } else {
+      setProfilePicture(data.profile_picture_url);
+    }
+  };
 
   //listener
   //براي انتخاب تصوير و تبديل وضعيت به حالت اديت
@@ -41,7 +104,7 @@ const MainAvatar = ({ style, size }) => {
   };
 
   //خواندن فايل  و تبديل به
-  //blob
+  //data 64
   //جهت اديت
   const readFile = (file) => {
     return new Promise((resolve) => {
@@ -52,7 +115,7 @@ const MainAvatar = ({ style, size }) => {
   };
 
   //اينجا براي نمايش خروجي هست
-  //با فرمت blob
+  //با فرمت data 64
   // از اين لينک
   // https://codesandbox.io/s/q8q1mnr01w?file=/src/index.js:1204-1219
   const GetOutPutImage = useCallback(async () => {
@@ -63,7 +126,6 @@ const MainAvatar = ({ style, size }) => {
         rotate
       );
       setCroppedImage(croppedImage);
-      setActivePart("loading");
     } catch (e) {
       console.error(e);
       console.error("an error accured");
@@ -116,6 +178,7 @@ const MainAvatar = ({ style, size }) => {
         zoom={zoom}
         crop={crop}
         onCropChange={setCrop}
+        cropShape="round"
         image={imageSrc}
         rotation={rotate}
         aspect={1 / 1}
@@ -141,12 +204,12 @@ const MainAvatar = ({ style, size }) => {
         aria-label="Zoom"
         defaultValue={1}
         valueLabelDisplay="auto"
-        step={0.25}
+        step={avatarZoomOptions.step}
         onChange={(event, newValue) => {
           setZoom(newValue);
         }}
-        min={1}
-        max={3}
+        min={avatarZoomOptions.min}
+        max={avatarZoomOptions.max}
         valueLabelFormat={(value) => value + "X"}
         ValueLabelComponent={({ value, children }) => (
           <Tooltip enterTouchDelay={0} placement="top" title={value}>
@@ -240,7 +303,10 @@ const MainAvatar = ({ style, size }) => {
   const CreateAvatarPart = () => {
     return (
       <>
-        <Avatar style={{ width: "100%", height: "100%" }} />
+        <Avatar
+          src={profilePicture}
+          style={{ width: "100%", height: "100%" }}
+        />
         <form style={{ position: "relative", bottom: size / 3 }}>
           <label htmlFor="icon-button-file">
             <IconButton
