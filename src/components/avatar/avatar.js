@@ -46,18 +46,16 @@ const MainAvatar = ({ style, size }) => {
   }, [croppedImage]);
 
   useEffect(() => {
-    console.log(
-      "profile picture must be gotten from server instead of this log"
-    );
     GetProfilePictureRequest({ datacaller: GetPrfolePictureFromServer });
   }, [reloadProfilePicture]);
 
   const GetImageUrlFromServer = ({ image_url, error }) => {
     if (error) {
       console.log("error in sending picture to server");
+      setActivePart("avatar");
+      //ارور هندل نداریم. فعلا بر میگردیم به عقب
     } else {
       setActivePart("loading");
-      console.log(image_url);
 
       // اینجا باید به سرور پاس بدیم
       // اطلاعاتی که میگیریم رو و پروفایل رو تعییر بدیم
@@ -78,16 +76,21 @@ const MainAvatar = ({ style, size }) => {
   const GetEditProfilePictureResponseFromServer = (data) => {
     if (data.error) {
       console.log("error in changing profile url");
+      setActivePart("avatar");
+      //ارور هندل نداریم. فعلا بر میگردیم به عقب
     } else {
       setReloadProfilePicture(reloadProfilePicture + 1);
+      setActivePart("avatar");
     }
   };
 
   const GetPrfolePictureFromServer = (data) => {
     if (data.error) {
       console.log("error in getting prfoile picture from server");
+      setActivePart("avatar");
+      //ارور هندل نداریم. فعلا بر میگردیم به عقب
     } else {
-      setProfilePicture(data.profile_picture_url);
+      setProfilePicture(data);
     }
   };
 
@@ -127,8 +130,9 @@ const MainAvatar = ({ style, size }) => {
       );
       setCroppedImage(croppedImage);
     } catch (e) {
-      console.error(e);
       console.error("an error accured");
+      setActivePart("avatar");
+      //ارور هندل نداریم. فعلا بر میگردیم به عقب
     }
   }, [croppedAreaPixels, rotate]);
 

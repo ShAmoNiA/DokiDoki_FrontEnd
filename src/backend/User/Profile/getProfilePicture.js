@@ -7,18 +7,26 @@ const GetProfilePictureRequest = async ({
 }) => {
   var token = localStorage.getItem("token");
 
+  var tokenn = "token " + token;
   await MainAxiosRequest()
-    .get("get_profile", {
-      headers: {
-        Authorization: `token ${token}`,
-      },
-    })
+    .post(
+      "profile_preview",
+      {},
+      {
+        headers: {
+          Authorization: tokenn,
+        },
+      }
+    )
     .then((e) => {
       console.log("here must be cleaned, pass profile url to avatar component");
       console.log(e);
-      datacaller(BackendImageAdress + e.data.profile_picture_url);
+      if (e.data.success) {
+        datacaller(BackendImageAdress + e.data.profile.profile_picture_url);
+      }
     })
     .catch((e) => {
+      console.log(e.response);
       datacaller({ error: true });
     });
 };
