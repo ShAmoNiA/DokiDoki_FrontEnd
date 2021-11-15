@@ -99,10 +99,16 @@ const MainAvatar = ({ style, size }) => {
   const handleImageChange = async (e) => {
     if (e.target.files.length > 0) {
       const file = e.target.files[0];
-      let imageDataUrl = await readFile(file);
-      setImageSrc(imageDataUrl);
-      setActivePart("edit");
+      console.log(file);
+      if (file.type === "image/jpeg" || file.type === "image/png") {
+        let imageDataUrl = await readFile(file);
+        setImageSrc(imageDataUrl);
+        setActivePart("edit");
+      } else {
+        console.log("error only png and jpg supported");
+      }
     } else {
+      console.log("error choose a file please");
     }
   };
 
