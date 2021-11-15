@@ -21,6 +21,7 @@ const EditProfilePictureRequest = async ({
       datacaller(e.data);
     })
     .catch((e) => {
+      console.log(e.response);
       datacaller({ error: true });
     });
 };
