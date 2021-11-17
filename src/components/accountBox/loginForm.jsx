@@ -13,16 +13,22 @@ import Loading from "../../Loading";
 import { Marginer } from "../marginer";
 import { AccountContext } from "./accountContext";
 import SnackBar from "./SnackBar";
-import axios from "axios";
+
+import axios from "../../helper/axiosInstance";
 import { Redirect } from "react-router-dom";
+import auth from '../../helper/auth'
+import { useHistory } from "react-router-dom";
+
+
 export function LoginForm(props) {
   const { switchToSignup } = useContext(AccountContext);
   const snkbr = useRef();
   const [password, setPassword] = useState(0);
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
+  const history = useHistory()
+  const login = async()=> {
 
-  async function login() {
     var token = "";
     if (!email)
       return snkbr.current.openSnackbar(
@@ -40,7 +46,8 @@ export function LoginForm(props) {
         "error"
       );
 
-    const url = "http://185.141.107.81:1111/api/login";
+    const url = "/login";
+
     const formData = new FormData();
     formData.append("username", email);
     formData.append("password", password);
@@ -51,22 +58,22 @@ export function LoginForm(props) {
     };
     setLoading(true);
 
-    axios.post(url, formData, config).then((res) => {
-      if (res.data.status == "success") {
-        document.cookie = `Authorization=${res.data.token}`;
-        snkbr.current.openSnackbar(res.data.message, "hi");
+
+    const {data} = await axios.post(url , formData , config);
+    console.log(data.success);
+    if(data.success){
+      setLoading(false);
+      auth.setToken(data.token)
+      snkbr.current.openSnackbar('welcome', "info");
+      history.push('/')
+      // setTimeout(()=>{history.push('/')} , '1000')
+    }
+    else {
         setLoading(false);
-        setTimeout(() => {
-          window.location.href = "/";
-        }, 2000);
-        if (!res.data.success)
-          return snkbr.current.openSnackbar("welcome ", "info");
-      } else {
-        setLoading(false);
-        if (!res.data.success)
-          return snkbr.current.openSnackbar(res.data.message, "error");
-      }
-    });
+        return snkbr.current.openSnackbar(data.message, "error");
+    }
+
+
   }
 
   return (
