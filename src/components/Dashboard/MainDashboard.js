@@ -10,8 +10,8 @@ export default function Main(props) {
 			<header>
 				<i onClick={props.setOpen} className="bi bi-list side-nav"></i>
 				<i className="bi bi-bell notification"></i>
-				<span>Dija Larkin</span>
-
+				
+				<span className="header-prof-name"> Mahziar T. </span>
 				<img
 					className="header-prof"
 					src={Profile}

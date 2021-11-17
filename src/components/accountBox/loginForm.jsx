@@ -61,7 +61,7 @@ export function LoginForm(props) {
       auth.setToken(data.token)
       snkbr.current.openSnackbar('welcome', "info");
       history.push('/')
-      // setTimeout(()=>{history.push('/')} , '1000')
+      setTimeout(()=>{history.push('/')} , '1000')
     }
     else {
         setLoading(false);
