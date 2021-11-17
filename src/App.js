@@ -15,6 +15,7 @@ import {
   useHistory,
 } from "react-router-dom";
 import MainAvatar from "./components/avatar/avatar";
+import ProfilePreview from "./components/profile/profilePreview";
 
 const App = () => {
   return (
@@ -28,18 +29,10 @@ const App = () => {
             <Login type="signup" />
           </Route>
           <Route path="/avatar-test" exact>
-            <div
-              style={{
-                display: "flex",
-                width: "100%",
-                height: 300,
-                backgroundColor: "gray",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <MainAvatar size={300} />
-            </div>
+            <MainAvatar size={300} />
+          </Route>
+          <Route path="/profile-preview-test" exact>
+            <ProfilePreview />
           </Route>
         </Switch>
       </Router>
