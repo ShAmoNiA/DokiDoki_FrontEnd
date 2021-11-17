@@ -1,27 +1,32 @@
 import { BackendImageAdress } from "../../address";
 import MainAxiosRequest from "../../MainAxiosRequest";
 
-const GetProfilePictureRequest = async ({
-  profile_picture_url,
-  datacaller,
-}) => {
+const GetProfileDetailsRequest = async ({ datacaller }) => {
   var token = localStorage.getItem("token");
 
   var tokenn = "token " + token;
   await MainAxiosRequest()
-    .get("my_profile_preview", {
+    .get("profile_preview", {
+      params: {
+        username: "rahmani",
+      },
       headers: {
         Authorization: tokenn,
       },
     })
     .then((e) => {
+      console.log(e);
       if (e.data.success) {
-        datacaller(BackendImageAdress + e.data.profile.profile_picture_url);
+        datacaller(e.data.profile);
+      } else {
+        datacaller({ error: true });
       }
     })
     .catch((e) => {
+      console.log(e.response);
+
       datacaller({ error: true });
     });
 };
 
-export default GetProfilePictureRequest;
+export default GetProfileDetailsRequest;
