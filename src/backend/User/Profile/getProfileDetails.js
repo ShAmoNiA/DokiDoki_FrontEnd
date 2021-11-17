@@ -22,6 +22,7 @@ const GetProfileDetailsRequest = async ({ datacaller }) => {
         datacaller({ error: true });
       }
     })
+
     .catch((e) => {
       console.log(e.response);
 
