@@ -13,10 +13,12 @@ import Loading from "../../Loading";
 import { Marginer } from "../marginer";
 import { AccountContext } from "./accountContext";
 import SnackBar from "./SnackBar";
+
 import axios from "../../helper/axiosInstance";
 import { Redirect } from "react-router-dom";
 import auth from '../../helper/auth'
 import { useHistory } from "react-router-dom";
+
 
 export function LoginForm(props) {
   const { switchToSignup } = useContext(AccountContext);
@@ -26,6 +28,7 @@ export function LoginForm(props) {
   const [loading, setLoading] = useState(false);
   const history = useHistory()
   const login = async()=> {
+
     var token = "";
     if (!email)
       return snkbr.current.openSnackbar(
@@ -44,6 +47,7 @@ export function LoginForm(props) {
       );
 
     const url = "/login";
+
     const formData = new FormData();
     formData.append("username", email);
     formData.append("password", password);
@@ -53,6 +57,7 @@ export function LoginForm(props) {
       },
     };
     setLoading(true);
+
 
     const {data} = await axios.post(url , formData , config);
     console.log(data.success);
@@ -67,6 +72,7 @@ export function LoginForm(props) {
         setLoading(false);
         return snkbr.current.openSnackbar(data.message, "error");
     }
+
 
   }
 
