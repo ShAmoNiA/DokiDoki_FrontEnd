@@ -1,0 +1,37 @@
+.ti-snackbar-root {
+    direction: rtl;
+    &.info {
+      .ti-snackbarcontent-root-default {
+        background-color: #0ad871;
+      }
+    }
+    .ti-snackbarcontent-root-default {
+      background-color: #ff6565;
+      flex-direction: row-reverse;
+  
+      .MuiSnackbarContent-message {
+        flex-grow: 1;
+        text-align: end;
+      }
+      .MuiSnackbarContent-action {
+        padding-left: 0;
+      }
+    }
+}
+.MuiSnackbarContent-root{
+  font-size: 12px !important;
+}
+@media screen and (min-width: 600px){
+  .MuiSnackbar-anchorOriginTopCenter{ 
+    top: 17% !important;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+  }
+}
+@media screen and (min-width: 600px){
+  .MuiSnackbarContent-root {
+      flex-grow: initial;
+      min-width: 260px !important;
+  }
+}

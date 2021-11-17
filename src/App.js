@@ -1,26 +1,44 @@
-import React, {useState} from 'react'
+import React from "react";
+// import Sidebar from "./Sidebar";
+// import Feed from "./Feed";
+// import Widgets from "./Widgets";
+// import Profile from "./Profile";
+import "./App.css";
+import Login from "./screens/Login/Login";
+import axios from "axios";
+import auth from "./helper/auth";
+import Dashboard from "./components/Dashboard/Dashboard";
+// import Search from "./Search";
+import "antd/dist/antd.css";
+import {
+	BrowserRouter as Router,
+	Switch,
+	Route,
+	Redirect,
+} from "react-router-dom";
 
-import Nav from './components/Nav'
-import Main from './components/Main'
-
-import './App.css'
-
-function App() {
-
-    const {innerWidth: width, innerHeight: height} = window;
-
-    const [isOpen, open] = useState(false);
-
-    const openNav = () => {
-        open(!isOpen);
-    }
-
-    return (
-        <div className="box">
-            <Nav isOpen={isOpen}/>
-            <Main setOpen={openNav}/>
-        </div>
-    );
-}
+const App = () => {
+	return (
+		<div className="app">
+			<Router>
+				<Switch>
+					<Route path="/" exact>
+						{auth.checkLogin() ? (
+							<Dashboard />
+						) : (
+							<Redirect to="/login" />
+						)}
+					</Route>
+					<Route path="/Login" exact>
+						<Login type="signin" />
+					</Route>
+					<Route path="/Signup" exact>
+						<Login type="signup" />
+					</Route>
+				</Switch>
+			</Router>
+		</div>
+	);
+};
 
 export default App;
