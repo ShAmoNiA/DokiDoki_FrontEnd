@@ -6,14 +6,20 @@ export const BoxContainer = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: 10px;
+`;
 
+export const SmallText = styled.p`
+  color: #fff;
+  font-weight: 500;
+  font-size: 11px;
+  z-index: 10;
 `;
 
 export const FormContainer = styled.form`
   width: 100%;
   display: flex;
   flex-direction: column;
-  box-shadow: 0px 1.2px 2.5px rgba(15, 15, 15, 0.19);
+  box-shadow: 0px 1px 2.5px rgba(15, 15, 15, 0.19);
 `;
 
 export const MutedLink = styled.a`
@@ -25,7 +31,7 @@ export const MutedLink = styled.a`
 
 export const BoldLink = styled.a`
   font-size: 11px;
-  color:rgba(0,115,255,1) 100%;
+  color: rgba(0, 115, 255, 1) 100%;
   font-weight: 500;
   text-decoration: none;
   margin: 0 4px;
