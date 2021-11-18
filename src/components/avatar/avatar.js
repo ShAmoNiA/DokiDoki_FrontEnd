@@ -1,4 +1,11 @@
-import { Avatar, colors, IconButton, Slider, Tooltip } from "@material-ui/core";
+import {
+  Avatar,
+  colors,
+  IconButton,
+  Slider,
+  Tooltip,
+  Button,
+} from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { useCallback } from "react";
 import Cropper from "react-easy-crop";
@@ -208,7 +215,6 @@ const MainAvatar = ({ style, size }) => {
         alignItems: "center",
       }}
     >
-      <div style={{ marginRight: 10 }}>Zoom:</div>
       <Slider
         style={{ height: 0 }}
         aria-label="Zoom"
@@ -247,7 +253,6 @@ const MainAvatar = ({ style, size }) => {
           alignItems: "center",
         }}
       >
-        <div style={{ marginRight: 3 }}> Rotate:</div>
         <IconButton
           onClick={() => {
             if (rotate === 270) setRotate(0);
@@ -260,25 +265,35 @@ const MainAvatar = ({ style, size }) => {
       </div>
 
       <div>
-        <button
+        <Button
           onClick={() => {
             setImageSrc("");
             setActivePart("avatar");
           }}
+          variant="outlined"
+          color="inherit"
+          style={{
+            color: "yellow",
+          }}
         >
           cancell
-        </button>
+        </Button>
       </div>
 
       <div>
-        <button
+        <Button
           onClick={() => {
             //setActivePart("loading");
             GetOutPutImage();
           }}
+          style={{
+            background:
+              "linear-gradient(70deg, rgba(97,9,121,1) 18%,rgba(0,115,255,1) 100%)",
+            color: "white",
+          }}
         >
           Upload
-        </button>
+        </Button>
       </div>
     </div>
   );

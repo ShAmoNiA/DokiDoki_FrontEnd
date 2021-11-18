@@ -23,6 +23,7 @@ const NameText = {
 const ItemText = {
   fontSize: 14,
   color: fontColorItem,
+  fontFamily: "-apple-system",
 };
 // fontFamily: "serif",
 
