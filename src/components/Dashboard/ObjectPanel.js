@@ -1,16 +1,17 @@
 import Profile from "./profile.png";
-import React, { useState } from "react";
-import { Modal, Empty, Button, Alert, Form, Input, Radio, message } from "antd";
-import { useSelector, useDispatch } from "react-redux";
+import React, {useState} from "react";
+import {Modal, Empty, Button, Alert, Form, Input, Radio, message} from "antd";
+import {useSelector, useDispatch} from "react-redux";
 import axios from "../../helper/axiosInstance";
-import { PhoneOutlined } from "@ant-design/icons";
+import {PhoneOutlined} from "@ant-design/icons";
+import {colors} from "@material-ui/core";
 
 const TYPE = "patient";
 export default function ObjectPanel() {
 	const [showEdit, setShowEdit] = useState(false);
 	const dispatch = useDispatch();
 	const [form] = Form.useForm();
-	const { TextArea } = Input;
+	const {TextArea} = Input;
 	const user = useSelector((state) => state.user);
 	const showRecordModal = () => {
 		Modal.info({
@@ -18,7 +19,7 @@ export default function ObjectPanel() {
 				user.medical_records !== "undefined" ? (
 					user.medical_records
 				) : (
-					<Empty />
+					<Empty/>
 				),
 		});
 	};
@@ -37,10 +38,10 @@ export default function ObjectPanel() {
 		}
 		console.log(values);
 		try {
-			const { data } = await axios.post("/edit_profile", formData);
+			const {data} = await axios.post("/edit_profile", formData);
 			if (data.success) {
 				setShowEdit(false);
-				dispatch({ type: "SET_USER", user: values });
+				dispatch({type: "SET_USER", user: values});
 				message.success("Profile Successfully Updated");
 			}
 		} catch (e) {
@@ -62,13 +63,14 @@ export default function ObjectPanel() {
 				closable={false}
 				visible={showEdit}
 				width={1000}
+				data-testid={"edit-profile-modal"}
 			>
 				<Alert
 					message="Enter Each part you need to change, all fields are optional"
 					type="warning"
 					showIcon
 					closable
-					style={{ marginBottom: "2em" }}
+					style={{marginBottom: "2em"}}
 				/>
 
 				<Form
@@ -83,7 +85,7 @@ export default function ObjectPanel() {
 					}}
 				>
 					<Form.Item name="username" label="Username">
-						<Input />
+						<Input/>
 					</Form.Item>
 					<Form.Item
 						name="email"
@@ -91,24 +93,23 @@ export default function ObjectPanel() {
 						rules={[
 							{
 								pattern: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g,
-								message:
-									"please enter yout email in right format",
+								message: "please enter yout email in right format",
 							},
 						]}
 					>
-						<Input />
+						<Input/>
 					</Form.Item>
 					<Form.Item name="phone" label="Phone">
-						<Input />
+						<Input/>
 					</Form.Item>
 					<Form.Item name="first_name" label="First Name">
-						<Input />
+						<Input/>
 					</Form.Item>
 					<Form.Item name="last_name" label="Last Name">
-						<Input />
+						<Input/>
 					</Form.Item>
 					<Form.Item name="sex" label="Sex">
-						<Radio.Group>
+						<Radio.Group data-testid="edit-profile-edit-sex-radio-group">
 							<Radio.Button value="F">Female</Radio.Button>
 							<Radio.Button value="M">Male</Radio.Button>
 							<Radio.Button value="P">Private</Radio.Button>
@@ -118,37 +119,28 @@ export default function ObjectPanel() {
 					{!user.is_doctor ? (
 						<>
 							<Form.Item name="weight" label="Weight">
-								<Input type="number" />
+								<Input type="number"/>
 							</Form.Item>
 							<Form.Item name="height" label="Height">
-								<Input type="number" />
+								<Input type="number"/>
 							</Form.Item>
-							<Form.Item
-								name="medical_records"
-								label="medical records"
-							>
-								<TextArea />
+							<Form.Item name="medical_records" label="medical records">
+								<TextArea/>
 							</Form.Item>
 						</>
 					) : (
 						<>
 							<Form.Item name="degree" label="degree">
-								<Input />
+								<Input/>
 							</Form.Item>
 							<Form.Item name="cv" label="cv">
-								<Input />
+								<Input/>
 							</Form.Item>
-							<Form.Item
-								name="office_location"
-								label="office location"
-							>
-								<Input />
+							<Form.Item name="office_location" label="office location">
+								<Input/>
 							</Form.Item>
-							<Form.Item
-								name="expertise_tags"
-								label="expertise tags"
-							>
-								<TextArea />
+							<Form.Item name="expertise_tags" label="expertise tags">
+								<TextArea/>
 							</Form.Item>
 						</>
 					)}
@@ -159,15 +151,16 @@ export default function ObjectPanel() {
 						}}
 					>
 						<Button
-							style={{ margin: "0 1em" }}
+							style={{margin: "0 1em"}}
 							type="secondary"
 							onClick={() => {
 								setShowEdit(false);
 							}}
+							data-testid="edit-profile-cancel-button"
 						>
 							Cancel
 						</Button>
-						<Button type="primary" htmlType="submit">
+						<Button type="primary" htmlType="submit" data-testid="edit-profile-submit-button">
 							Submit
 						</Button>
 					</Form.Item>
@@ -177,19 +170,13 @@ export default function ObjectPanel() {
 				<div className="object-info">
 					<div className="object-personal-info">
 						<div>
-							<img
-								className="info-profile"
-								src={Profile}
-								alt="profile"
-							/>
+							<img className="info-profile" src={Profile} alt="profile"/>
 						</div>
 						<div>
-							<span className="profile-name">
-								{user.fullname}
-							</span>
-							<span>
-								<PhoneOutlined /> {user.phone}
-							</span>
+							<span className="profile-name">{user.fullname}</span>
+							<span className="phone-number">
+                <PhoneOutlined style={{fontSize: "150%"}}/> {user.phone}
+              </span>
 							<span
 								className="info-block-button"
 								onClick={() => {
@@ -200,23 +187,20 @@ export default function ObjectPanel() {
 							</span>
 						</div>
 					</div>
-					<div>
+					<div className="info">
 						<h3>Info</h3>
 
 						<span>{`${user.sex} ${user.height}cm ${
 							user.weight !== 0 ? user.weight + "kg" : ""
 						}`}</span>
 					</div>
-					<div>
+					<div className="records">
 						<h3>Records</h3>
-						<span
-							className="info-block-button"
-							onClick={showRecordModal}
-						>
-							<span>Show Records</span>
-						</span>
+						<span className="info-block-button" onClick={showRecordModal}>
+              <span>Show Records</span>
+            </span>
 					</div>
-					<div>
+					<div className="logout-button">
 						<Button
 							type="primary"
 							onClick={() => {
@@ -229,14 +213,14 @@ export default function ObjectPanel() {
 					</div>
 				</div>
 				<ul className="object-menu">
-					<li>Today's consultation</li>
-					<li>Previous</li>
-					<li>Surgeries/Procedures</li>
-					<li>Clinical Notes</li>
-					<li>Tests</li>
-					<li>Diagnosis</li>
-					<li>Medication List</li>
-					<li>Vaccination</li>
+					<li className="object-menu1">Today's consultation</li>
+					<li className="object-menu2">Previous</li>
+					<li className="object-menu3">Surgeries/Procedures</li>
+					<li className="object-menu4">Clinical Notes</li>
+					<li className="object-menu5">Tests</li>
+					<li className="object-menu6">Diagnosis</li>
+					<li className="object-menu7">Medication List</li>
+					<li className="object-menu8">Vaccination</li>
 				</ul>
 			</div>
 		</>

@@ -2,8 +2,25 @@
     flex: 5;
     width: 100%;
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.19);
-    background-color: rgba(97, 74, 197, 0.034);
-    
+    background-color: rgb(215, 226, 233);
+    /* background-color: rgba(97, 74, 197, 0.034); */
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 20px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(23, 99, 187);
+  border-radius: 10px;
 }
 
 header {
@@ -17,8 +34,30 @@ header {
 }
 
 .header-prof {
-    width: 35px;
-    height: 35px;
+    /* float: right; */
+    width: 50px;
+    height: 50px;
+    margin-left: 4px;
+}
+.header-prof:hover {
+    cursor: pointer;
+    border-radius: 50px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.19);
+    transition: all 100ms ease-in-out;
+}
+
+.header-prof-name {
+    font-size: 15px;
+    margin: 0px;
+    padding: 8px;
+    margin-left: 780px;
+
+}
+.header-prof-name:hover {
+    cursor: pointer;
+    border-radius: 50px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.19);
+    transition: all 100ms ease-in-out;
 }
 
 .notification {
