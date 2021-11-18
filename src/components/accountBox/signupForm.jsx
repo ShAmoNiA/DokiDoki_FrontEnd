@@ -188,7 +188,9 @@ export function SignupForm(props) {
           errors.confirmPassword = false;
           return {};
         } else {
-          errstr = "";
+
+         var errstr = "";
+
 
           margin = 0;
           if (confirmPassword.length > 0)

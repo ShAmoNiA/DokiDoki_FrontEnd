@@ -2,8 +2,8 @@
     /* background-color: rgba(252, 209, 252, 0.445); */
     display: flex;
     gap: 1rem;
-    font-size: 1.5rem;
-    padding: 2.5rem 2.5rem;
+    font-size: .95rem;
+    padding: 2rem 2rem;
     cursor: pointer;
     border-radius: .75rem;
     text-align: center;

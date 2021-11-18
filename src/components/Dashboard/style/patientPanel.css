@@ -1,372 +1,218 @@
 .panel-holder {
-    margin: 2rem auto;
-    /* margin-left: 10px; */
-    width: 96.1%;
-	margin-left: 20px;
+	margin: 2rem auto;
+	/* margin-left: 10px; */
+	width: 80%;
 }
 
 .object-panel {
-    display: flex;
-    flex-direction: column;
-    background-color: white;
-    border: 1px solid var(--light);
-    border-radius: .5rem;
-    box-shadow: 0px 2px 8px rgba(15, 15, 15, 0.19);
-
+	display: flex;
+	flex-direction: column;
+	background-color: white;
+	border: 1px solid var(--light);
+	border-radius: 0.5rem;
+	box-shadow: 0px 2px 8px rgba(15, 15, 15, 0.19);
 }
 
 .object-info {
-    display: flex;
-    flex-direction: row;
-    border-bottom: 1px solid #e7e7e7;
-	
+	display: flex;
+	flex-direction: row;
+	border-bottom: 1px solid #e6e6e6;
 }
 
 .object-info > div {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: left;
-    border-right: 1px solid #e7e7e7;
-    padding: 2rem 1rem;
-	
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: left;
+	border-right: 1px solid #e6e6e6;
+	padding: 2rem 1rem;
 }
 
 .object-info > div:last-child {
-    border-right: none;
-	
+	border-right: none;
 }
 
 .object-info > div:first-child {
-    flex: 2;
-    flex-direction: row;
-    gap: 2rem;
-	
+	flex: 2;
+	flex-direction: row;
+	gap: 2rem;
 }
 
 .object-info > div:first-child > div {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-	
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
 }
 
 .profile-name {
-    font-weight: bold;
-    font-size: 1.5rem;
+	font-weight: bold;
+	font-size: 1.3rem;
 }
 
 .info-block-button {
-    font-size: 1.2rem;
-	background-color: rgb(88, 0, 146);
-    color: white;
-    text-align: center;
-    padding: .8rem;
-    border-radius: 2rem;
-    box-shadow: 0px 2px 8px rgba(15, 15, 15, 0.19);
-	margin-top: 5px;
-	background: rgb(3, 0, 36);
-    background: linear-gradient(
-    70deg,
-    rgba(97, 9, 121, 1) 18%,
-    rgba(0, 115, 255, 1) 100%
-    );
-
-}
-.info-block-button:hover {
-	/* font-weight: bold; */
-	cursor: pointer;
-    background: rgb(3, 0, 36);
-    background: linear-gradient(
-    70deg,
-    rgba(97, 9, 121, 1) 0%,
-    rgb(28, 130, 255) 0%
-    );
-	transition: all 300ms ease-in-out;
-    box-shadow: 0px 10px 8px rgba(0, 0, 0, 0.377);
-}
-
-.logout-button {
-	font-size: large;
+	font-size: 0.8rem;
+	background-color: purple;
+	color: white;
+	text-align: center;
+	padding: 0.5rem 0.5rem;
+	border-radius: 2rem;
+	box-shadow: 0px 2px 8px rgba(15, 15, 15, 0.19);
 }
 
 .object-personal-info {
-    display: flex;
-    flex-direction: row;
-
+	display: flex;
+	flex-direction: row;
 }
 
 .info-profile {
-    border-radius: 100px;
-    width: 150px;
-    height: 150px;
-    box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.19);
-		background-color: lightsalmon;
+	border-radius: 100px;
+	width: 70px;
+	height: 70px;
+	box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.19);
 }
-.info-profile:hover{
-    box-shadow: 0px 1px 50px rgb(84, 0, 194);
-    transition: all 400ms ease-in-out;
-    cursor: pointer;
+.info-profile:hover {
+	box-shadow: 0px 1px 50px rgb(84, 0, 194);
+	transition: all 400ms ease-in-out;
+	cursor: pointer;
 }
 
 .object-menu {
-    display: flex;
-    flex-direction: row;
-    list-style-type: none;
-    justify-content: space-around;
-    padding: 0 1rem;
-    gap: 1rem;
-	font-size: 13px;
+	display: flex;
+	flex-direction: row;
+	list-style-type: none;
+	justify-content: space-around;
+	padding: 0 1rem;
+	gap: 1rem;
 }
 
 .object-menu > li {
-	margin-top: 5px;
-	padding: 10px;
-    cursor: pointer;
-    text-align: center;
-    padding: 2 .5rem;
-	border-radius: 8px;
+	cursor: pointer;
+	text-align: center;
+	padding: 0 0.5rem;
 }
 
+/* .object-menu:hover {
+    font-size: large;
+} */
+
 .appointment-info {
-    display: flex;
-	margin-bottom: 20px;
-	margin-top: 20px;
-	border: 1px solid var(--light);
-	border-radius: .5rem;
+	display: flex;
 }
 
 .appointment-info > div {
-	width: 100%;
-	/* width: 350px; */
-    display: flex;
-    flex-direction: column;
-    gap: .5rem;
-    padding: 2rem 7rem;
-    font-size: 1.5rem;
-	background-color: rgb(255, 255, 255);
+	display: flex;
 	flex-direction: column;
-    /* box-shadow: 0px 2px 8px rgba(15, 15, 15, 0.19); */
-	border-right: 1px solid rgb(201, 201, 201);
-	text-align: center;
+	gap: 0.5rem;
+	padding: 2rem 3rem;
+	font-size: 1.2rem;
 }
 
 .app-info-title {
-    color: rgb(73, 73, 73);
+	color: gray;
 }
 
 .app-info-description {
-    font-weight: bold;
+	font-weight: bold;
 }
 
 .full-details-panel {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    gap: 2rem;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	gap: 2rem;
 }
 
 .full-details-panel > div {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 .panel {
-    flex: 2;
-    /*border: 1px solid var(--light);*/
-    border-radius: .5rem;
+	flex: 2;
+	/*border: 1px solid var(--light);*/
+	border-radius: 0.5rem;
 }
 
 .panel:last-child {
-    flex: 1;
-	font-size: 10px;
+	flex: 1;
 }
 
 .panel > .panel-item:first-child {
-    border-radius: .5rem .5rem 0 0;
+	border-radius: 0.5rem 0.5rem 0 0;
 }
 
 .panel > .panel-item:last-child {
-    border-bottom: 0;
-    border-radius: 0 0 .5rem .5rem;
+	border-bottom: 0;
+	border-radius: 0 0 0.5rem 0.5rem;
 }
 
-/* .blockchain-note {
-    display: flex;
-    flex-direction: column;
-    background-color: white;
-    text-align: center;
-    justify-content: space-around;
-    gap: .5rem;
-    border-radius: .5rem;
-	background-color: lightsalmon;
+.blockchain-note {
+	display: flex;
+	flex-direction: column;
+	background-color: white;
+	text-align: center;
+	justify-content: space-around;
+	gap: 0.5rem;
+	border-radius: 0.5rem;
 }
 
 .block-hash-button {
-    width: 50%;
-    font-size: .8rem;
-    color: lightgray;
-    border: 1px solid lightgray;
-    border-radius: 1rem;
-    margin: .5rem auto;
-	
-} */
+	width: 50%;
+	font-size: 0.8rem;
+	color: lightgray;
+	border: 1px solid lightgray;
+	border-radius: 1rem;
+	margin: 0.5rem auto;
+}
 
 .prescription-holder {
-	font-size: large;
-    border-radius: .5rem;
-    margin-top: 1rem;
-    background-color: white;
-    padding: 0 1rem;
-
+	border-radius: 0.5rem;
+	margin-top: 1rem;
+	background-color: white;
+	padding: 0 1rem;
 }
 
 @media only screen and (max-width: 1280px) {
-    .panel-holder {
-        width: 95%;
-    }
+	.panel-holder {
+		width: 95%;
+	}
 }
 
 @media only screen and (max-width: 960px) {
-    .full-details-panel {
-        flex-direction: column;
-        gap: 1rem;
-    }
+	.full-details-panel {
+		flex-direction: column;
+		gap: 1rem;
+	}
 
-    .object-info {
-        flex-direction: column;
-    }
+	.object-info {
+		flex-direction: column;
+	}
 
-    .object-menu {
-        justify-content: left;
-        overflow-x: scroll;
-    }
+	.object-menu {
+		justify-content: left;
+		overflow-x: scroll;
+	}
 
-    .appointment-info {
-        flex-direction: column;
-        text-align: center;
-    }
+	.appointment-info {
+		flex-direction: column;
+		text-align: center;
+	}
 
-    .object-info > div {
-        border-right: none;
-        border-bottom: 1px solid #e6e6e6;
-        padding: 1rem 1rem;
-    }
+	.object-info > div {
+		border-right: none;
+		border-bottom: 1px solid #e6e6e6;
+		padding: 1rem 1rem;
+	}
 
-    .object-info > div:last-child {
-        border-bottom: none;
-    }
+	.object-info > div:last-child {
+		border-bottom: none;
+	}
 
-    .object-info > div:first-child {
-        flex: 2;
-        flex-direction: row;
-        gap: 2rem;
-    }
-}
-
-.info > h3{
-	font-weight: bold;
-	font-size: 20px;
-}
-.info > span {
-	font-size: 15px;
-}
-
-.records > h3 {
-	font-weight: bold;
-	font-size: 20px;
-}
-
-
-/* //menu e paien */
-
-
-.object-menu1:hover {
-    background: rgb(3, 0, 36);
-    background: linear-gradient(
-    70deg,
-    rgba(97, 9, 121, 1) 18%,
-    rgba(0, 115, 255, 1) 100%
-    );
-    box-shadow: 0px 4px 8px rgba(15, 15, 15, 0.19);
-    color: white;
-}
-
-.object-menu2:hover {
-    background: rgb(3, 0, 36);
-    background: linear-gradient(
-    70deg,
-    rgba(97, 9, 121, 1) 18%,
-    rgba(0, 115, 255, 1) 100%
-    );
-    box-shadow: 0px 4px 8px rgba(15, 15, 15, 0.19);
-    color: white;
-}
-
-.object-menu3:hover {
-    background: rgb(3, 0, 36);
-    background: linear-gradient(
-    70deg,
-    rgba(97, 9, 121, 1) 18%,
-    rgba(0, 115, 255, 1) 100%
-    );
-    box-shadow: 0px 4px 8px rgba(15, 15, 15, 0.19);
-    color: white;
-}
-
-.object-menu4:hover {
-    background: rgb(3, 0, 36);
-    background: linear-gradient(
-    70deg,
-    rgba(97, 9, 121, 1) 18%,
-    rgba(0, 115, 255, 1) 100%
-    );
-    box-shadow: 0px 4px 8px rgba(15, 15, 15, 0.19);
-    color: white;
-}
-
-.object-menu5:hover {
-    background: rgb(3, 0, 36);
-    background: linear-gradient(
-    70deg,
-    rgba(97, 9, 121, 1) 18%,
-    rgba(0, 115, 255, 1) 100%
-    );
-    box-shadow: 0px 4px 8px rgba(15, 15, 15, 0.19);
-    color: white;
-}
-
-.object-menu6:hover {
-    background: rgb(3, 0, 36);
-    background: linear-gradient(
-    70deg,
-    rgba(97, 9, 121, 1) 18%,
-    rgba(0, 115, 255, 1) 100%
-    );
-    box-shadow: 0px 4px 8px rgba(15, 15, 15, 0.19);
-    color: white;
-}
-
-.object-menu7:hover {
-    background: rgb(3, 0, 36);
-    background: linear-gradient(
-    70deg,
-    rgba(97, 9, 121, 1) 18%,
-    rgba(0, 115, 255, 1) 100%
-    );
-    box-shadow: 0px 4px 8px rgba(15, 15, 15, 0.19);
-    color: white;
-}
-
-.object-menu8:hover {
-    background: rgb(3, 0, 36);
-    background: linear-gradient(
-    70deg,
-    rgba(97, 9, 121, 1) 18%,
-    rgba(0, 115, 255, 1) 100%
-    );
-    box-shadow: 0px 4px 8px rgba(15, 15, 15, 0.19);
-    color: white;
+	.object-info > div:first-child {
+		flex: 2;
+		flex-direction: row;
+		gap: 2rem;
+	}
 }
