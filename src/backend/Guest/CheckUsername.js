@@ -7,11 +7,9 @@ const CheckUsernameRequest = async ({ username, datacaller }) => {
     .get(url)
     .then((data) => {
       datacaller(data.data.exists);
-      console.log(data);
     })
     .catch((data) => {
       datacaller(false);
-      console.log(data);
     });
 };
 

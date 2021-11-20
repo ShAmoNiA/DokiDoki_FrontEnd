@@ -7,7 +7,6 @@ import "./App.css";
 import Login from "./screens/Login/Login";
 import axios from "axios";
 import auth from "./helper/auth";
-import Dashboard from "./components/Dashboard/Dashboard";
 // import Search from "./Search";
 import "antd/dist/antd.css";
 import {
@@ -18,6 +17,7 @@ import {
 } from "react-router-dom";
 import MainAvatar from "./components/avatar/avatar";
 import ProfilePreview from "./components/profile/profilePreview";
+import MainApp from "./components/Dashboard/Dashboard";
 
 const App = () => {
   return (
@@ -25,7 +25,7 @@ const App = () => {
       <Router>
         <Switch>
           <Route path="/" exact>
-            {auth.checkLogin() ? <Dashboard /> : <Redirect to="/login" />}
+            {auth.checkLogin() ? <MainApp /> : <Redirect to="/login" />}
           </Route>
           <Route path="/Login" exact>
             <Login type="signin" />

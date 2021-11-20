@@ -12,7 +12,6 @@ const GetProfileDetailsRequest = async ({ datacaller }) => {
       },
     })
     .then((e) => {
-      console.log(e);
       if (e.data.success) {
         datacaller(e.data.profile);
       } else {
@@ -20,8 +19,6 @@ const GetProfileDetailsRequest = async ({ datacaller }) => {
       }
     })
     .catch((e) => {
-      console.log(e.response);
-
       datacaller({ error: true });
     });
 };

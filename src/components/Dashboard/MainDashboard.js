@@ -3,22 +3,36 @@ import PatientPanel from "./PatientPanel";
 
 import "./style/main.css";
 import Profile from "./profile.png";
+import ProfilePreview from "../profile/profilePreview";
+import { Button } from "@material-ui/core";
 
 export default function Main(props) {
-	return (
-		<section className="main-container">
-			<header>
-				<i onClick={props.setOpen} className="bi bi-list side-nav"></i>
-				<i className="bi bi-bell notification"></i>
-				<span>Dija Larkin</span>
+  const CreateHeader = () => {
+    return (
+      <>
+        <header style={{ display: "flex", flexDirection: "row" }}>
+          <Button
+            onClick={() => {
+              localStorage.setItem("token", "");
+              window.location.reload();
+            }}
+          >
+            Log Out
+          </Button>
 
-				<img
-					className="header-prof"
-					src={Profile}
-					alt="profile-photo"
-				/>
-			</header>
-			<PatientPanel />
-		</section>
-	);
+          <div>search bar HERE</div>
+          <div>mini profile picture HERE</div>
+        </header>
+      </>
+    );
+  };
+  return (
+    <section
+      style={{ overflowY: "auto", width: 1000 }}
+      className="main-container"
+    >
+      {CreateHeader()}
+      <PatientPanel />
+    </section>
+  );
 }

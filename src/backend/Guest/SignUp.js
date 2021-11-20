@@ -17,10 +17,8 @@ const SignUpRequest = async ({
     .post("sign_up", { username, password, email, phone, fullname, is_doctor })
     .then((data) => {
       datacaller(data);
-      console.log(data);
     })
     .catch((e) => {
-      console.log(e.response);
       datacaller(e);
     });
 };

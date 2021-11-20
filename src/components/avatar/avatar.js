@@ -21,7 +21,7 @@ const bottomOptionsHeight = 70;
 
 const avatarZoomOptions = { min: 1, max: 3, step: 0.25 };
 
-const MainAvatar = ({ style, size }) => {
+const MainAvatar = ({ style, size, avatarupdated }) => {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
 
   const [imageSrc, setImageSrc] = useState("");
@@ -45,6 +45,8 @@ const MainAvatar = ({ style, size }) => {
 
   useEffect(() => {
     if (croppedImage !== null) {
+      setActivePart("loading");
+
       UploadImageRequest({
         image: croppedImage,
         datacaller: GetImageUrlFromServer,
@@ -63,6 +65,7 @@ const MainAvatar = ({ style, size }) => {
       //ارور هندل نداریم. فعلا بر میگردیم به عقب
     } else {
       setActivePart("loading");
+      avatarupdated();
 
       // اینجا باید به سرور پاس بدیم
       // اطلاعاتی که میگیریم رو و پروفایل رو تعییر بدیم
@@ -106,7 +109,6 @@ const MainAvatar = ({ style, size }) => {
   const handleImageChange = async (e) => {
     if (e.target.files.length > 0) {
       const file = e.target.files[0];
-      console.log(file);
       if (file.type === "image/jpeg" || file.type === "image/png") {
         let imageDataUrl = await readFile(file);
         setImageSrc(imageDataUrl);
@@ -272,9 +274,6 @@ const MainAvatar = ({ style, size }) => {
           }}
           variant="outlined"
           color="inherit"
-          style={{
-            color: "yellow",
-          }}
         >
           cancell
         </Button>

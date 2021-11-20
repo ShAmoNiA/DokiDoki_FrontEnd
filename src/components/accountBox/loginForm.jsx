@@ -13,12 +13,10 @@ import Loading from "../../Loading";
 import { Marginer } from "../marginer";
 import { AccountContext } from "./accountContext";
 import SnackBar from "./SnackBar";
-
 import axios from "../../helper/axiosInstance";
 import { Redirect } from "react-router-dom";
-import auth from '../../helper/auth'
+import auth from "../../helper/auth";
 import { useHistory } from "react-router-dom";
-
 
 export function LoginForm(props) {
   const { switchToSignup } = useContext(AccountContext);
@@ -26,9 +24,8 @@ export function LoginForm(props) {
   const [password, setPassword] = useState(0);
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
-  const history = useHistory()
-  const login = async()=> {
-
+  const history = useHistory();
+  const login = async () => {
     var token = "";
     if (!email)
       return snkbr.current.openSnackbar(
@@ -47,7 +44,6 @@ export function LoginForm(props) {
       );
 
     const url = "/login";
-
     const formData = new FormData();
     formData.append("username", email);
     formData.append("password", password);
@@ -58,23 +54,20 @@ export function LoginForm(props) {
     };
     setLoading(true);
 
-
-    const {data} = await axios.post(url , formData , config);
-    console.log(data.success);
-    if(data.success){
+    const { data } = await axios.post(url, formData, config);
+    if (data.success) {
       setLoading(false);
-      auth.setToken(data.token)
-      snkbr.current.openSnackbar('welcome', "info");
-      history.push('/')
-      // setTimeout(()=>{history.push('/')} , '1000')
+      auth.setToken(data.token);
+      snkbr.current.openSnackbar("welcome", "info");
+      history.push("/");
+      setTimeout(() => {
+        history.push("/");
+      }, "1000");
+    } else {
+      setLoading(false);
+      return snkbr.current.openSnackbar(data.message, "error");
     }
-    else {
-        setLoading(false);
-        return snkbr.current.openSnackbar(data.message, "error");
-    }
-
-
-  }
+  };
 
   return (
     <BoxContainer>
@@ -94,16 +87,27 @@ export function LoginForm(props) {
       <Marginer direction="vertical" margin={12} />
       <MutedLink href="#">Forget your password?</MutedLink>
       <Marginer direction="vertical" margin="1.5em" />
-      <SubmitButton type="submit" onClick={login} disabled={loading}>
+      <SubmitButton
+        data-testid="login-form-submit-btn"
+        type="submit"
+        onClick={login}
+        disabled={loading}
+      >
         {loading ? <Loading /> : "Sign in"}
       </SubmitButton>
       <Marginer direction="vertical" margin="1em" />
-      <MutedLink>
+      <div
+        style={{
+          fontSize: 11,
+          color: "rgba(172, 172, 172, 0.8)",
+          fontWeight: "500",
+        }}
+      >
         Don't have an account?
         <BoldLink style={{ cursor: "pointer" }} onClick={switchToSignup}>
           Sign up
         </BoldLink>
-      </MutedLink>
+      </div>
     </BoxContainer>
   );
 }
