@@ -528,12 +528,12 @@ export function SignupForm(props) {
         )}
       </SubmitButton>
       <Marginer direction="vertical" margin="1em" />
-      <MutedLink>
+      <div style={{ fontSize: 11, color: "rgba(172, 172, 172, 0.8)" }}>
         Already have an account?
         <BoldLink style={{ cursor: "pointer" }} onClick={switchToSignin}>
           Sign In
         </BoldLink>
-      </MutedLink>
+      </div>
     </BoxContainer>
   );
 }
