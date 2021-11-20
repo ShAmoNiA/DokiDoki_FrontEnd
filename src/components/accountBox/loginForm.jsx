@@ -55,14 +55,12 @@ export function LoginForm(props) {
     setLoading(true);
 
     const { data } = await axios.post(url, formData, config);
+    console.log(data.success);
     if (data.success) {
       setLoading(false);
       auth.setToken(data.token);
       snkbr.current.openSnackbar("welcome", "info");
-      history.push("/");
-      setTimeout(() => {
-        history.push("/");
-      }, "1000");
+      window.location = "/";
     } else {
       setLoading(false);
       return snkbr.current.openSnackbar(data.message, "error");
