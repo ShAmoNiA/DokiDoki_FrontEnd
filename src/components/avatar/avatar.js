@@ -65,7 +65,6 @@ const MainAvatar = ({ style, size, avatarupdated }) => {
       //ارور هندل نداریم. فعلا بر میگردیم به عقب
     } else {
       setActivePart("loading");
-      avatarupdated();
 
       // اینجا باید به سرور پاس بدیم
       // اطلاعاتی که میگیریم رو و پروفایل رو تعییر بدیم
@@ -91,6 +90,7 @@ const MainAvatar = ({ style, size, avatarupdated }) => {
     } else {
       setReloadProfilePicture(reloadProfilePicture + 1);
       setActivePart("avatar");
+      avatarupdated();
     }
   };
 
