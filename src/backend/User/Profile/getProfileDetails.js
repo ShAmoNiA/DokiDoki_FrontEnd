@@ -6,16 +6,12 @@ const GetProfileDetailsRequest = async ({ datacaller }) => {
 
   var tokenn = "token " + token;
   await MainAxiosRequest()
-    .get("profile_preview", {
-      params: {
-        username: "rahmani",
-      },
+    .get("my_profile_preview", {
       headers: {
         Authorization: tokenn,
       },
     })
     .then((e) => {
-      console.log(e);
       if (e.data.success) {
         datacaller(e.data.profile);
       } else {
@@ -24,8 +20,6 @@ const GetProfileDetailsRequest = async ({ datacaller }) => {
     })
 
     .catch((e) => {
-      console.log(e.response);
-
       datacaller({ error: true });
     });
 };

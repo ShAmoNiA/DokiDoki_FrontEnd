@@ -528,7 +528,14 @@ export function SignupForm(props) {
         )}
       </SubmitButton>
       <Marginer direction="vertical" margin="1em" />
-      <div style={{ fontSize: 11, color: "rgba(172, 172, 172, 0.8)" }}>
+
+      <div
+        style={{
+          fontSize: 11,
+          color: "rgba(172, 172, 172, 0.8)",
+          fontWeight: "500",
+        }}
+      >
         Already have an account?
         <BoldLink style={{ cursor: "pointer" }} onClick={switchToSignin}>
           Sign In

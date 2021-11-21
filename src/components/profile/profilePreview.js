@@ -23,6 +23,7 @@ const NameText = {
 const ItemText = {
   fontSize: 14,
   color: fontColorItem,
+  fontFamily: "-apple-system",
 };
 // fontFamily: "serif",
 
@@ -43,7 +44,7 @@ const ItemWithValue = {
   borderWidth: 1,
 };
 
-const ProfilePreview = () => {
+const ProfilePreview = ({ editpofile, reload }) => {
   const [profileDetails, setProfileDetails] = useState("");
 
   useEffect(() => {
@@ -61,16 +62,14 @@ const ProfilePreview = () => {
       },
     });
     //اول اطلاعات پروفايل رو دريافت ميکنيم تو اين کامپوننت
+    // دقت کن که اين تگ ها بايد درست شن
+    //الان روي حالت تست تگ ها هستيم
     setProfileDetails({});
-  }, []);
-
-  //console.log(profileDetails);
+  }, [reload]);
 
   const CreateExpertisesTags = () => {
     var tags = profileDetails.expertise_tags + "";
     var tagsArray = tags.split(" ");
-    console.log(tags);
-    console.log(tagsArray);
     if (tagsArray.length === 0) return <div>no tags yet</div>;
     else
       return (
@@ -378,12 +377,18 @@ const ProfilePreview = () => {
               justifyContent: "center",
               display: "flex",
               marginLeft: 16,
+              flexDirection: "column",
             }}
           >
             <Avatar
               src={BackendImageAdress + profileDetails.profile_picture_url}
               style={{ width: 150, height: 150 }}
             />
+            <div style={{ marginTop: 15 }}>
+              <span className="info-block-button" onClick={editpofile}>
+                EDIT PROFILE
+              </span>
+            </div>
           </div>
           <div
             style={{
@@ -398,10 +403,18 @@ const ProfilePreview = () => {
               ...ItemText,
             }}
           >
-            <div style={{ ...NameText, ...ItemValueText, alignSelf: "center" }}>
-              {profileDetails.fullname === null
-                ? "No Full Name"
-                : profileDetails.fullname}
+            <div
+              style={{
+                ...NameText,
+                ...ItemValueText,
+                alignSelf: "center",
+              }}
+            >
+              <div>
+                {profileDetails.fullname === null
+                  ? "No Full Name"
+                  : profileDetails.fullname}
+              </div>
             </div>
             <div style={{ ...ItemWithValue }}>
               <div>Username:</div>

@@ -1,21 +1,52 @@
 body {
-  background: rgb(3, 0, 36);
-  background: linear-gradient(
-    70deg,
-    rgba(3, 0, 36, 1) 0%,
-    rgba(97, 9, 121, 1) 34%,
-    rgba(0, 115, 255, 1) 100%
-  );
+	background: rgb(3, 0, 36);
+	background: linear-gradient(
+		70deg,
+		rgba(3, 0, 36, 1) 0%,
+		rgba(97, 9, 121, 1) 34%,
+		rgba(0, 115, 255, 1) 100%
+	);
 
-  --twitter-color: rgba(97, 9, 121, 1);
-  --twitter-background: #eeeeee;
+	--twitter-color: rgba(97, 9, 121, 1);
+	--twitter-background: #eeeeee;
 }
 
 .app {
-  display: flex;
-  height: 100vh;
-  max-width: 1300px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 0 10px;
+	display: flex;
+	height: 100vh;
+	max-width: 1300px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 0 10px;
+}
+
+.ant-input:focus {
+	border-color: #5e1375 !important;
+}
+
+.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
+	color: #5e1375 !important;
+	background: #fff !important;
+	border-color: #5e1375 !important;
+}
+
+.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled)::before {
+	background-color: #5e1375 !important;
+}
+
+.ant-radio-button-wrapper:hover {
+	color: #5e1375 !important;
+}
+
+.ant-btn-primary {
+	border-color: #5e1375 !important;
+	background: #5e1375 !important;
+}
+
+.ant-message-notice-content {
+	background: red !important;
+}
+
+.ant-message {
+	color: white !important;
 }

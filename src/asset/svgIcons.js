@@ -51,6 +51,7 @@ const AccountTick = (props) => {
   );
 };
 
+
 const RotatePicture = (props) => {
   var size = 24;
   if (props.size !== undefined) {
@@ -246,6 +247,7 @@ const LoadingGif = (props) => {
     </svg>
   );
 };
+
 
 export {
   DoctorIcon,

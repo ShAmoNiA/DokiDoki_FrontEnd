@@ -6,22 +6,27 @@ import React, { useContext } from "react";
 import "./App.css";
 import Login from "./screens/Login/Login";
 import axios from "axios";
+import auth from "./helper/auth";
 // import Search from "./Search";
+import "antd/dist/antd.css";
 import {
   HashRouter as Router,
   Switch,
   Route,
   Redirect,
-  useHistory,
 } from "react-router-dom";
 import MainAvatar from "./components/avatar/avatar";
 import ProfilePreview from "./components/profile/profilePreview";
+import MainApp from "./components/Dashboard/Dashboard";
 
 const App = () => {
   return (
     <div className="app">
       <Router>
         <Switch>
+          <Route path="/" exact>
+            {auth.checkLogin() ? <MainApp /> : <Redirect to="/login" />}
+          </Route>
           <Route path="/Login" exact>
             <Login type="signin" />
           </Route>
