@@ -18,6 +18,7 @@ const GetProfileDetailsRequest = async ({ datacaller }) => {
         datacaller({ error: true });
       }
     })
+
     .catch((e) => {
       datacaller({ error: true });
     });

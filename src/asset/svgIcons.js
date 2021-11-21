@@ -3,6 +3,7 @@ import React from "react";
 const DoctorIcon = (props) => {
   return (
     <svg
+      data-testid="doctor-icon"
       xmlns="http://www.w3.org/2000/svg"
       version="1.1"
       width="24"
@@ -17,6 +18,7 @@ const DoctorIcon = (props) => {
 
 const SickIcon = (props) => (
   <svg
+    data-testid="sick-icon"
     xmlns="http://www.w3.org/2000/svg"
     version="1.1"
     width="24"
@@ -36,6 +38,7 @@ const AccountTick = (props) => {
 
   return (
     <svg
+      data-testid="account-tick-icon"
       xmlns="http://www.w3.org/2000/svg"
       version="1.1"
       width={size}
@@ -57,6 +60,7 @@ const RotatePicture = (props) => {
 
   return (
     <svg
+      data-testid="rotate-icon"
       xmlns="http://www.w3.org/2000/svg"
       version="1.1"
       width={size}
@@ -77,6 +81,7 @@ const UploadAvatar = (props) => {
 
   return (
     <svg
+      data-testid="upload-avatar-icon"
       xmlns="http://www.w3.org/2000/svg"
       version="1.1"
       width={size}
@@ -97,6 +102,7 @@ const CameraIcon = (props) => {
 
   return (
     <svg
+      data-testid="camera-icon"
       xmlns="http://www.w3.org/2000/svg"
       version="1.1"
       width={size}
@@ -117,6 +123,7 @@ const LoadingGif = (props) => {
 
   return (
     <svg
+      data-testid="loading-gif-icon"
       xmlns="http://www.w3.org/2000/svg"
       style={{
         margin: "auto",
