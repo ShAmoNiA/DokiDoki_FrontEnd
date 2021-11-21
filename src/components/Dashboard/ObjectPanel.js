@@ -79,7 +79,13 @@ export default function ObjectPanel() {
           style={{ marginBottom: "2em" }}
         />
 
-        <div style={{ display: "flex", justifyContent: "center" }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginBottom: 16,
+          }}
+        >
           <MainAvatar size={300} avatarupdated={AvatarUpdated} />
         </div>
 
@@ -112,10 +118,7 @@ export default function ObjectPanel() {
           <Form.Item name="phone" label="Phone">
             <Input />
           </Form.Item>
-          <Form.Item name="first_name" label="First Name">
-            <Input />
-          </Form.Item>
-          <Form.Item name="last_name" label="Last Name">
+          <Form.Item name="fullname" label="Full Name">
             <Input />
           </Form.Item>
           <Form.Item name="sex" label="Sex">

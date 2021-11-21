@@ -29,6 +29,9 @@ export default function Nav(props) {
       >
         <h1 style={{ cursor: "default" }}>DokiDoki</h1>
         <NavItem icon="bi bi-map" name="Dashboard" />
+        <NavItem icon="bi bi-map" name="Menu Item2" />
+        <NavItem icon="bi bi-map" name="Menu Item3" />
+        <NavItem icon="bi bi-map" name="Menu Item4" />
       </nav>
     </>
   );

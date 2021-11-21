@@ -53,6 +53,7 @@ const ProfilePreview = ({ editpofile, reload }) => {
         if (data.error) {
           console.log("error in getting profile details");
         } else {
+          console.log(data.expertise_tags);
           setProfileDetails({
             ...data,
             expertise_tags:
@@ -297,7 +298,7 @@ const ProfilePreview = ({ editpofile, reload }) => {
             padding: 16,
             display: "flex",
             flexDirection: "row",
-            justifyContent: "center",
+            justifyContent: "space-between",
             flexWrap: "wrap",
             alignItems: "stretch",
             backgroundColor: "white",
@@ -319,12 +320,11 @@ const ProfilePreview = ({ editpofile, reload }) => {
           <div
             style={{
               flex: 1,
-              minWidth: 350,
               marginLeft: 32,
               marginRight: 32,
               display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-around",
+              flexDirection: "row",
+              justifyContent: "flex-end",
               flexWrap: "nowrap",
               ...ItemText,
               ...ItemValueText,
