@@ -1,66 +1,60 @@
 import Profile from "./profile.png";
-import React, { useState } from "react";
-import { Modal, Empty, Button, Alert, Form, Input, Radio, message } from "antd";
-import { useSelector, useDispatch } from "react-redux";
+import React, {useState} from "react";
+import {Modal, Empty, Button, Alert, Form, Input, Radio, message} from "antd";
+import {useSelector, useDispatch} from "react-redux";
 import axios from "../../helper/axiosInstance";
-import { PhoneOutlined } from "@ant-design/icons";
-import { colors } from "@material-ui/core";
-import ProfilePreview from "../profile/profilePreview";
-import MainAvatar from "../avatar/avatar";
+import {PhoneOutlined} from "@ant-design/icons";
+import {colors} from "@material-ui/core";
 
 const TYPE = "patient";
 export default function ObjectPanel() {
-  const [reloadProfile, setReloadProfile] = useState(true);
-  const [showEdit, setShowEdit] = useState(false);
-  const dispatch = useDispatch();
-  const [form] = Form.useForm();
-  const { TextArea } = Input;
-  const user = useSelector((state) => state.user);
-  const showRecordModal = () => {
-    Modal.info({
-      content:
-        user.medical_records !== "undefined" ? user.medical_records : <Empty />,
-    });
-  };
-
-  const AvatarUpdated = () => {
-    setReloadProfile(!reloadProfile);
-  };
-
-  const editProfileHandler = async (values) => {
-    let formData = new FormData();
-    for (let key in values) {
-      if ((key === "weight" || key === "height") && values[key]) {
-        formData.append(key, +values[key]);
-        continue;
-      }
-      if (values[key]) {
-        formData.append(key, values[key]);
-      } else {
-        delete values[key];
-      }
-    }
-
-    try {
-      const { data } = await axios.post("/edit_profile", formData);
-      if (data.success) {
-        setShowEdit(false);
-        dispatch({ type: "SET_USER", user: values });
-        message.success("Profile Successfully Updated");
-        setReloadProfile(!reloadProfile);
-      }
-    } catch (e) {
-      for (let error in e.response.data) {
-        const errorMessage = e.response.data[error].reduce(
-          (acc, val) => acc + val,
-          ""
-        );
-        message.error(errorMessage);
-      }
-    }
-  };
-
-  return (
+	const [showEdit, setShowEdit] = useState(false);
+	const dispatch = useDispatch();
+	const [form] = Form.useForm();
+	const {TextArea} = Input;
+	const user = useSelector((state) => state.user);
+	const showRecordModal = () => {
+		Modal.info({
+			content:
+				user.medical_records !== "undefined" ? (
+					user.medical_records
+				) : (
+					<Empty/>
+				),
+		});
+	};
+	const editProfileHandler = async (values) => {
+		let formData = new FormData();
+		for (let key in values) {
+			if ((key === "weight" || key === "height") && values[key]) {
+				formData.append(key, +values[key]);
+				continue;
+			}
+			if (values[key]) {
+				formData.append(key, values[key]);
+			} else {
+				delete values[key];
+			}
+		}
+		console.log(values);
+		try {
+			const {data} = await axios.post("/edit_profile", formData);
+			if (data.success) {
+				setShowEdit(false);
+				dispatch({type: "SET_USER", user: values});
+				message.success("Profile Successfully Updated");
+			}
+		} catch (e) {
+			for (let error in e.response.data) {
+				const errorMessage = e.response.data[error].reduce(
+					(acc, val) => acc + val,
+					""
+				);
+				message.error(errorMessage);
+			}
+		}
+	};
+	return (
     <>
       <Modal
         footer={null}
@@ -78,16 +72,6 @@ export default function ObjectPanel() {
           closable
           style={{ marginBottom: "2em" }}
         />
-
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            marginBottom: 16,
-          }}
-        >
-          <MainAvatar size={300} avatarupdated={AvatarUpdated} />
-        </div>
 
         <Form
           onFinish={editProfileHandler}
@@ -118,7 +102,10 @@ export default function ObjectPanel() {
           <Form.Item name="phone" label="Phone">
             <Input />
           </Form.Item>
-          <Form.Item name="fullname" label="Full Name">
+          <Form.Item name="first_name" label="First Name">
+            <Input />
+          </Form.Item>
+          <Form.Item name="last_name" label="Last Name">
             <Input />
           </Form.Item>
           <Form.Item name="sex" label="Sex">
@@ -183,11 +170,65 @@ export default function ObjectPanel() {
           </Form.Item>
         </Form>
       </Modal>
+      <div className="object-panel" data-testid="patient-panel-object-panel">
+        <div className="object-info">
+          <div className="object-personal-info">
+            <div>
+              <img className="info-profile" src={Profile} alt="profile" />
+            </div>
+            <div>
+              <span className="profile-name">
+                {user.first_name + " " + user.last_name}
+              </span>
+              <span className="phone-number">
+                <PhoneOutlined style={{ fontSize: "150%" }} /> {user.phone}
+              </span>
+              <span
+                className="info-block-button"
+                onClick={() => {
+                  setShowEdit(true);
+                }}
+              >
+                EDIT PROFILE
+              </span>
+            </div>
+          </div>
+          <div className="info">
+            <h3>Info</h3>
 
-      <ProfilePreview
-        reload={reloadProfile}
-        editpofile={() => setShowEdit(true)}
-      />
+            <span>{`${user.sex} ${user.height}cm ${
+              user.weight !== 0 ? user.weight + "kg" : ""
+            }`}</span>
+          </div>
+          <div className="records">
+            <h3>Records</h3>
+            <span className="info-block-button" onClick={showRecordModal}>
+              <span>Show Records</span>
+            </span>
+          </div>
+          <div className="logout-button">
+            <Button
+              type="primary"
+              onClick={() => {
+                localStorage.setItem("token", "");
+                window.location.reload();
+              }}
+            >
+              Logout
+            </Button>
+          </div>
+        </div>
+        <ul className="object-menu">
+          <li className="object-menu1">Today's consultation</li>
+          <li className="object-menu2">Previous</li>
+          <li className="object-menu3">Surgeries/Procedures</li>
+          <li className="object-menu4">Clinical Notes</li>
+          <li className="object-menu5">Tests</li>
+          <li className="object-menu6">Diagnosis</li>
+          <li className="object-menu7">Medication List</li>
+          <li className="object-menu8">Vaccination</li>
+        </ul>
+      </div>
     </>
   );
 }

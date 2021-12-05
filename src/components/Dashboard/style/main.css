@@ -1,9 +1,9 @@
 .main-container {
-  flex: 5;
-  width: 100%;
-  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.19);
-  background-color: rgb(215, 226, 233);
-  /* background-color: rgba(97, 74, 197, 0.034); */
+    flex: 5;
+    width: 100%;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.19);
+    background-color: rgb(215, 226, 233);
+    /* background-color: rgba(97, 74, 197, 0.034); */
 }
 
 /* width */
@@ -24,57 +24,58 @@
 }
 
 header {
-  display: flex;
-  flex-direction: row;
-  gap: 1rem;
-  padding: 1.5rem 3rem;
-  align-items: center;
-  background-color: white;
-  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.19);
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    padding: 1.5rem 3rem;
+    align-items: center;
+    background-color: white;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.19);
 }
 
 .header-prof {
-  /* float: right; */
-  width: 50px;
-  height: 50px;
-  margin-left: 4px;
+    /* float: right; */
+    width: 50px;
+    height: 50px;
+    margin-left: 4px;
 }
 .header-prof:hover {
-  cursor: pointer;
-  border-radius: 50px;
-  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.19);
-  transition: all 100ms ease-in-out;
+    cursor: pointer;
+    border-radius: 50px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.19);
+    transition: all 100ms ease-in-out;
 }
 
 .header-prof-name {
-  font-size: 15px;
-  margin: 0px;
-  padding: 8px;
-  margin-left: 780px;
+    font-size: 15px;
+    margin: 0px;
+    padding: 8px;
+    margin-left: 780px;
+
 }
 .header-prof-name:hover {
-  cursor: pointer;
-  border-radius: 50px;
-  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.19);
-  transition: all 100ms ease-in-out;
+    cursor: pointer;
+    border-radius: 50px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.19);
+    transition: all 100ms ease-in-out;
 }
 
 .notification {
-  margin-left: auto;
-  font-size: 1.5rem;
+    margin-left: auto;
+    font-size: 1.5rem;
 }
 
 .side-nav {
-  display: none;
-  font-size: 1.5rem;
+    display: none;
+    font-size: 1.5rem;
 }
 
-@media only screen and (max-width: 1280px) {
-  .main-container {
-    flex: 1;
-  }
+@media only screen and (max-width: 1280px){
+    .main-container {
+        flex: 1;
+    }
 
-  .side-nav {
-    display: block;
-  }
+    .side-nav {
+        display: block;
+    }
 }
