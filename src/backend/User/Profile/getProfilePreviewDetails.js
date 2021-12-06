@@ -13,6 +13,7 @@ const GetProfilePreviewDetailsRequest = async ({ datacaller, username }) => {
     })
 
     .catch((e) => {
+      console.log(e.response);
       datacaller({ error: true });
     });
 };

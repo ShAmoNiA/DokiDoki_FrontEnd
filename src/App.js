@@ -19,6 +19,8 @@ import MainAvatar from "./components/avatar/avatar";
 import ProfilePreview from "./components/profile/profilePreview";
 import MainApp from "./components/Dashboard/Dashboard";
 
+import MainSearch from "./components/search/MainSearch";
+
 const App = () => {
   return (
     <div className="app">
@@ -37,7 +39,10 @@ const App = () => {
             <MainAvatar size={300} />
           </Route>
           <Route path="/profile-preview-test" exact>
-            <ProfilePreview />
+            <ProfilePreview username="ahmadrezadl" />
+          </Route>
+          <Route path="/search-test">
+            <MainSearch />
           </Route>
         </Switch>
       </Router>
