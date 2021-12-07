@@ -40,15 +40,21 @@ const App = () => {
 					<Route path="/Signup" exact>
 						<Login type="signup" />
 					</Route>
-					<Route path="/dashboard">
-						<Dashboard />
-					</Route>
-					<Route path="/avatar-test" exact>
-						<MainAvatar size={300} />
-					</Route>
-					<Route path="/profile-preview-test" exact>
-						<ProfilePreview />
-					</Route>
+					{!auth.checkLogin() ? (
+						<Redirect to={"/login"} />
+					) : (
+						<>
+							<Route path="/dashboard">
+								<Dashboard />
+							</Route>
+							<Route path="/avatar-test" exact>
+								<MainAvatar size={300} />
+							</Route>
+							<Route path="/profile-preview-test" exact>
+								<ProfilePreview />
+							</Route>
+						</>
+					)}
 				</Switch>
 			</Router>
 		</div>

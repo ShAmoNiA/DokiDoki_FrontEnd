@@ -1,8 +1,10 @@
 import "./style/Nav.css";
 
 import React from "react";
-
+import { useSelector } from "react-redux";
 export default function Nav({ openDrawer }) {
+	const user = useSelector((state) => state.user);
+
 	return (
 		<nav className="nav-bar">
 			<span className="nav-title">DokiDokii</span>
@@ -10,10 +12,15 @@ export default function Nav({ openDrawer }) {
 				<i className="bi bi-search search-icon"></i>
 			</span>
 			<div onClick={openDrawer} className="nav-profile">
-				<span className="profile-name">Mahziar T.</span>
-				<span className="profile-pic">
-					<i className="bi bi-person-circle"></i>
-				</span>
+				<span className="profile-name">{user.username}</span>
+
+				<img
+					className="profile-pic"
+					src={
+						"http://185.141.107.81:1111" + user.profile_picture_url
+					}
+					alt="profile"
+				/>
 			</div>
 		</nav>
 	);

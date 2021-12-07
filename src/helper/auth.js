@@ -24,7 +24,8 @@ class Auth {
 		localStorage.setItem("token", acc);
 	}
 	logout() {
-		this.setToken("");
+		localStorage.setItem("token", "");
+		window.location.reload();
 	}
 }
 

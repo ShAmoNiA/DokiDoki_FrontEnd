@@ -53,18 +53,21 @@ export function LoginForm(props) {
 			},
 		};
 		setLoading(true);
-
+		try{
 		const {data} = await axios.post(url, formData, config);
-		console.log(data.success);
-		if (data.success) {
 			setLoading(false);
 			auth.setToken(data.token)
 			snkbr.current.openSnackbar('welcome', "info");
 			window.location = '/'
-		} else {
+			}catch(e){
 			setLoading(false);
-			return snkbr.current.openSnackbar(data.message, "error");
-		}
+			let errors = {...e.response.data};
+			let message = '';
+			for(let field in errors){
+				message += errors[field].reduce((acc , val)=>acc+val , '')
+			}
+			return snkbr.current.openSnackbar(message, "error");
+			}
 
 	}
 
