@@ -66,3 +66,7 @@
 	margin: 0 1rem;
 	font-size: 3rem;
 }
+.profile-pic:hover {
+	box-shadow: 0px 2px 20px rgb(84, 0, 194);
+	transition: all 400ms ease-in-out;
+}

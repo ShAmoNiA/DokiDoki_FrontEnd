@@ -7,7 +7,7 @@ export default function Nav({ openDrawer }) {
 
 	return (
 		<nav className="nav-bar">
-			<span className="nav-title">DokiDokii</span>
+			<span className="nav-title">DokiDoki</span>
 			<span>
 				<i className="bi bi-search search-icon"></i>
 			</span>

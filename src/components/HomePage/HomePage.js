@@ -31,40 +31,48 @@ export default function HomePage() {
 		setVisible(false);
 	};
 	return (
-		<div className="wrapper">
-			<Drawer
-				title="DOKI DOKI"
-				placement={"right"}
-				width={300}
-				onClose={onClose}
-				visible={visible}
-				extra={
-					<Space>
-						<Button onClick={onClose}>Cancel</Button>
-						<Button type="primary" onClick={onClose}>
-							OK
-						</Button>
-					</Space>
-				}
-			>
-				<div className="drawer-items">
-					<div
-						onClick={() => {
-							history.push("/dashboard");
-						}}
-					>
-						Setting
-					</div>
-					<div>Switch</div>
-					<div>news</div>
-					<div>Blog</div>
+    <div className="wrapper">
+      <Drawer
+        title="Main Menu"
+        placement={"right"}
+        width={300}
+        onClose={onClose}
+        visible={visible}
+        extra={
+          <Space>
+            <Button onClick={onClose}>Cancel</Button>
+            <Button type="primary" onClick={onClose}>
+              OK
+            </Button>
+          </Space>
+        }
+      >
+        <div className="drawer-items">
+          <div
+            onClick={() => {
+              history.push("/dashboard");
+            }}
+          >
+            Dashboard
+          </div>
+          <div>Settings</div>
+          <div>Switch</div>
+          <div>Cards</div>
+          <div>News</div>
+          <div>Blog</div>
+          <div>Help</div>
+          <span className="line"></span>
 
-					<div onClick={auth.logout}>logout</div>
-				</div>
-			</Drawer>
-			<Nav openDrawer={showDrawer} />
-			<Main />
-			<Footer />
-		</div>
-	);
+          <div className="logout-items" onClick={auth.logout}>
+            Logout
+          </div>
+
+          {/* <span className="line"></span> */}
+        </div>
+      </Drawer>
+      <Nav openDrawer={showDrawer} />
+      <Main />
+      <Footer />
+    </div>
+  );
 }

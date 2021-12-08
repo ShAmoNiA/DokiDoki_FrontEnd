@@ -2,14 +2,14 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: gray;
+    background-color: rgb(83, 83, 83);
     color: white;
     font-size: 2rem;
     padding: 2rem 3rem;
 }
 
 .footer > hr {
-    background-color: white;
+    background-color: rgb(243, 243, 243);
 }
 
 .footer > span {
