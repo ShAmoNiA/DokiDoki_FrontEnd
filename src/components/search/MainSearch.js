@@ -17,6 +17,8 @@ const MainSearch = ({ active = "search" }) => {
 
   const [DoSearch, setDoSearch] = useState(false);
 
+  const [searchedText, setSearchedText] = useState("r");
+
   const history = useHistory();
 
   useEffect(() => {
@@ -45,9 +47,14 @@ const MainSearch = ({ active = "search" }) => {
   }, []);
 
   useEffect(() => {
-    if (selectedCategories.length === 0) setDoSearch(false);
-    else setDoSearch(true);
-  }, [selectedCategories]);
+    if (activePart === tabs.tag)
+      if (selectedCategories.length === 0) setDoSearch(false);
+      else setDoSearch(true);
+
+    if (activePart === tabs.search)
+      if (searchedText !== "") setDoSearch(true);
+      else setDoSearch(false);
+  }, [selectedCategories, searchedText, activePart]);
 
   const CreateCommenSearch = () => {
     return <div>common</div>;
@@ -83,6 +90,8 @@ const MainSearch = ({ active = "search" }) => {
           if (activePart !== tabkey) setActivePart(tabkey);
           //باید اطلاعات سرچ رو تغییر بدیم
           setSelectedCategories([]);
+          setSearchedText("");
+          setDoSearch(false);
           history.push(SearchBaseUrl + "/" + tabsname[tabkey]);
         }}
         activeKey={activePart}
@@ -102,6 +111,7 @@ const MainSearch = ({ active = "search" }) => {
         type={activePart}
         categories={selectedCategories}
         DoSearch={DoSearch}
+        searchedText={searchedText}
       />
     </div>
   );

@@ -7,6 +7,7 @@ import GetProfileDetailsRequest from "../../backend/User/Profile/getProfileDetai
 import GetProfilePreviewDetailsRequest from "../../backend/User/Profile/getProfilePreviewDetails";
 import MainAvatar from "../avatar/avatar";
 import { Modal } from "antd";
+import { useHistory } from "react-router";
 
 const fontColorItem = "gray";
 const fontColorValue = "black";
@@ -46,27 +47,23 @@ const ItemWithValue = {
   borderWidth: 1,
 };
 
-const ProfilePreview = ({ username }) => {
+const ProfilePreview = ({ username, setUsername }) => {
   const [mUsername, setMUsername] = useState("");
   const [profileDetails, setProfileDetails] = useState({});
 
   const [modalStatus, setModalStatus] = useState(false);
+
+  const historyy = useHistory();
 
   useEffect(() => {
     if (mUsername !== "")
       GetProfilePreviewDetailsRequest({
         username: mUsername,
         datacaller: (data) => {
-          console.log(data);
           if (data.error) {
             console.log("error in getting profile details");
           } else {
-            console.log(data.expertise_tags);
-            setProfileDetails({
-              ...data,
-              expertise_tags:
-                "maghz_va_asab roode dastgahe_govaresh dastgahe_gvaresh dastgahe_garesh dastgahe_gesh",
-            });
+            setProfileDetails(data);
           }
         },
       });
@@ -107,6 +104,10 @@ const ProfilePreview = ({ username }) => {
                   console.log(
                     "tag=> " + t + " must be searched instead of this log"
                   );
+                  window.open("#/search-test/Tags/" + t, "_blank");
+
+                  // بستن مودال
+                  // تغییر کتگوری به کتگوری کلیک شده
                 }}
                 variant="outlined"
                 color="primary"
@@ -425,6 +426,7 @@ const ProfilePreview = ({ username }) => {
       footer={null}
       onCancel={() => {
         setMUsername("");
+        setUsername("");
         setModalStatus(false);
       }}
       width={750}
