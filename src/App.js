@@ -42,7 +42,9 @@ const App = () => {
             <ProfilePreview username="ahmadrezadl" />
           </Route>
           <Route path="/search-test">
-            <MainSearch />
+            <div style={{ overflowY: "auto", width: "100%" }}>
+              <MainSearch />
+            </div>
           </Route>
         </Switch>
       </Router>

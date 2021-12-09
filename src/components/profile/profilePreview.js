@@ -365,6 +365,7 @@ const ProfilePreview = ({ username, setUsername }) => {
               <Avatar
                 src={BackendImageAdress + profileDetails.profile_picture_url}
                 style={{ width: 150, height: 150 }}
+                data-testid="avatar"
               />
             </div>
             <div
@@ -387,7 +388,7 @@ const ProfilePreview = ({ username, setUsername }) => {
                   alignSelf: "center",
                 }}
               >
-                <div>
+                <div data-testid="fullname">
                   {profileDetails.fullname === null
                     ? "No Full Name"
                     : profileDetails.fullname}
