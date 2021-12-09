@@ -15,13 +15,13 @@ function card({ title, imageUrl, location, Specialty, sex, openModal }) {
         <div className="card-title">
           <h3>Dr. {title}</h3>
         </div>
-        <div className="card-body">
+        <div style={{ paddingTop: 2, textAlign: "center" }}>
           <p>Specialty : {Specialty}</p>
         </div>
-        <div className="card-body">
+        <div style={{ paddingTop: 2, textAlign: "center" }}>
           <p>location : {location}</p>
         </div>
-        <div className="card-body">sex : {sex}</div>
+        <div style={{ paddingTop: 2, textAlign: "center" }}>sex : {sex}</div>
       </div>
       <div className="btn">
         <button
