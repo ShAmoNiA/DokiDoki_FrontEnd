@@ -3,36 +3,33 @@ import PatientPanel from "./PatientPanel";
 
 import "./style/main.css";
 import Profile from "./profile.png";
-import ProfilePreview from "../profile/profilePreview";
-import { Button } from "@material-ui/core";
-
+import { useSelector } from "react-redux";
 export default function Main(props) {
-  const CreateHeader = () => {
-    return (
-      <>
-        <header style={{ display: "flex", flexDirection: "row" }}>
-          <Button
-            onClick={() => {
-              localStorage.setItem("token", "");
-              window.location.reload();
-            }}
-          >
-            Log Out
-          </Button>
+	const user = useSelector((state) => state.user);
+	return (
+		<section
+			className="main-container"
+			data-testid="dashboard-main-container"
+		>
+			<header>
+				<i onClick={props.setOpen} className="bi bi-list side-nav"></i>
+				<i className="bi bi-bell notification"></i>
 
-          <div>search bar HERE</div>
-          <div>mini profile picture HERE</div>
-        </header>
-      </>
-    );
-  };
-  return (
-    <section
-      style={{ overflowY: "auto", width: 1000 }}
-      className="main-container"
-    >
-      {CreateHeader()}
-      <PatientPanel />
-    </section>
-  );
+				<span
+					className="header-prof-name"
+					data-testid="header-profile-name"
+				>
+					{user.username}
+				</span>
+				<img
+					className="header-prof"
+					src={
+						"http://185.141.107.81:1111" + user.profile_picture_url
+					}
+					alt="profile-photo"
+				/>
+			</header>
+			<PatientPanel />
+		</section>
+	);
 }
