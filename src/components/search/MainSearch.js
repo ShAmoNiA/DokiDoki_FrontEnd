@@ -21,6 +21,7 @@ const MainSearch = ({ active = "search" }) => {
 
   const history = useHistory();
 
+  // چک کردن ادرس و لود کردن تب ها
   useEffect(() => {
     var path = history.location.pathname;
 
@@ -46,6 +47,9 @@ const MainSearch = ({ active = "search" }) => {
     }
   }, []);
 
+  // dosearch
+  // برای نمایش نتایج سرچ استفاده میشه
+  // اینجا بررسی میشه که الان وقت نشون دادن نتایج هست یا نه
   useEffect(() => {
     if (activePart === tabs.tag)
       if (selectedCategories.length === 0) setDoSearch(false);
@@ -75,16 +79,8 @@ const MainSearch = ({ active = "search" }) => {
     );
   };
 
-  return (
-    <div
-      style={{
-        background: "white",
-        width: "100%",
-        paddingLeft: 8,
-        paddingRight: 8,
-        overflowY: "auto",
-      }}
-    >
+  const CreateTabs = () => {
+    return (
       <Tabs
         onChange={(tabkey) => {
           if (activePart !== tabkey) setActivePart(tabkey);
@@ -106,6 +102,20 @@ const MainSearch = ({ active = "search" }) => {
           {CreateCategorySearch()}
         </Tabs.TabPane>
       </Tabs>
+    );
+  };
+
+  return (
+    <div
+      style={{
+        background: "white",
+        width: "100%",
+        minWidth: "100%",
+        paddingLeft: 8,
+        paddingRight: 8,
+      }}
+    >
+      {CreateTabs()}
 
       <SearchResault
         type={activePart}
