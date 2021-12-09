@@ -1,0 +1,29 @@
+.history-item {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem 1rem;
+    background-color: white;
+    border-bottom: 1px solid var(--light);
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.19);
+}
+
+.history-item > div {
+    display: flex;
+    flex-direction: row;
+}
+
+.history-item > div > span:last-child {
+    margin-left: auto;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem
+}
+
+.history-item-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.history-item:last-child {
+    border-radius: 0 0 .5rem .5rem;
+}
