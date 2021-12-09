@@ -21,6 +21,8 @@ import ProfilePreview from "./components/profile/profilePreview";
 import HomePage from "./components/HomePage/HomePage";
 import { Home } from "@material-ui/icons";
 
+import MainSearch from "./components/search/MainSearch";
+
 const App = () => {
 	return (
 		<div className="app">
@@ -53,12 +55,18 @@ const App = () => {
 							<Route path="/profile-preview-test" exact>
 								<ProfilePreview />
 							</Route>
+             <Route path="/search-test">
+            <div style={{ overflowY: "auto", width: "100%" }}>
+              <MainSearch />
+            </div>
+          </Route>
 						</>
 					)}
 				</Switch>
 			</Router>
 		</div>
 	);
+
 };
 
 export default App;
