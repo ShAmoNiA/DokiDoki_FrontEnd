@@ -21,7 +21,7 @@ function card({ title, imageUrl, location, Specialty, sex, openModal }) {
         <div style={{ paddingTop: 2, textAlign: "center" }}>
           <p>location : {location}</p>
         </div>
-        <div style={{ paddingTop: 2, textAlign: "center" }}>sex : {sex}</div>
+        <div style={{ paddingTop: 2, textAlign: "center" }}>sex: {sex}</div>
       </div>
       <div className="btn">
         <button
