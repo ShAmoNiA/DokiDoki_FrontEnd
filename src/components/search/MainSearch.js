@@ -3,6 +3,7 @@ import CategorySelecter from "./category/categorySelecter";
 import { Tabs } from "antd";
 import SearchResault from "./searchResault/searchResault";
 import { Link, useHistory } from "react-router-dom";
+import SearchBar from "../SearchBar/SearchBar";
 
 const tabs = { search: "1", advanced: "2", tag: "3" };
 
@@ -17,7 +18,7 @@ const MainSearch = ({ active = "search" }) => {
 
   const [DoSearch, setDoSearch] = useState(false);
 
-  const [searchedText, setSearchedText] = useState("r");
+  const [searchedText, setSearchedText] = useState("");
 
   const history = useHistory();
 
@@ -61,7 +62,14 @@ const MainSearch = ({ active = "search" }) => {
   }, [selectedCategories, searchedText, activePart]);
 
   const CreateCommenSearch = () => {
-    return <div>common</div>;
+    return (
+      <div>
+        <SearchBar
+          placeholder="Search on username, name, etc."
+          setSearchedText={setSearchedText}
+        />
+      </div>
+    );
   };
 
   const CreateAdvancedSearch = () => {
@@ -91,6 +99,7 @@ const MainSearch = ({ active = "search" }) => {
           history.push(SearchBaseUrl + "/" + tabsname[tabkey]);
         }}
         activeKey={activePart}
+        centered
       >
         <Tabs.TabPane tab={<span>Search</span>} key={tabs.search}>
           {CreateCommenSearch()}
