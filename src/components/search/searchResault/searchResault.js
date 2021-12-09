@@ -134,7 +134,31 @@ const SearchResault = ({
 
   const CreateLoading = () => {
     if (DoSearch)
-      if (currentPage > maxPag) {
+      if (doctors.length === 0) {
+        if (loading) {
+          return (
+            <div
+              style={{
+                marginTop: 100,
+              }}
+            >
+              <LoadingGif height={100} size={100} />
+            </div>
+          );
+        } else
+          return (
+            <div
+              style={{
+                fontSize: 22,
+                textAlign: "center",
+                padding: 25,
+                marginTop: 100,
+              }}
+            >
+              Nothing Found!
+            </div>
+          );
+      } else if (currentPage > maxPag) {
         return (
           <div style={{ fontSize: 22, textAlign: "center", padding: 25 }}>
             The End. Reached all!

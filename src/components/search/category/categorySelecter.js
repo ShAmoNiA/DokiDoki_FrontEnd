@@ -27,7 +27,7 @@ const CategorySelecter = ({ setSelectedTags, selectedTags }) => {
   }, []);
 
   return (
-    <div style={{ width: "100%", minWidth: 200 }}>
+    <div style={{ width: "100%", minWidth: 200, textAlign: "center" }}>
       <Select
         onChange={(newValue) => {
           setSelectedTags(newValue);

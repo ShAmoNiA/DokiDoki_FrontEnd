@@ -68,7 +68,7 @@ function SearchBar({ placeholder, data, setSearchedText }) {
           />
           <div className="searchIcon">
             {filteredData.length === 0 ? (
-              <SearchIcon />
+              <SearchIcon style={{ color: "gray" }} />
             ) : (
               <CloseIcon id="clearBtn" onClick={clearInput} />
             )}
