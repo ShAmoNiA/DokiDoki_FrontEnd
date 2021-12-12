@@ -22,6 +22,7 @@ import HomePage from "./components/HomePage/HomePage";
 import { Home } from "@material-ui/icons";
 
 import MainSearch from "./components/search/MainSearch";
+import MainMessage from "./components/Chat/message";
 
 const App = () => {
   return (
@@ -49,6 +50,39 @@ const App = () => {
               <Route path="/search-test">
                 <div style={{ overflowY: "auto", width: "100%" }}>
                   <MainSearch />
+                </div>
+              </Route>
+
+              <Route path="/chat-test">
+                <div
+                  style={{
+                    height: 500,
+                    width: 500,
+                    backgroundColor: "white",
+                  }}
+                >
+                  <MainMessage
+                    message="hello, its a message hello, its a message hello, its a message hello, its a message hello, its a message"
+                    date="date"
+                    sender
+                    seen
+                  />
+
+                  <MainMessage
+                    message="hello, its a message hello, its a message hello, its a message hello, its a message hello, its a message"
+                    date="date"
+                    seen
+                    sender
+                  />
+
+                  <MainMessage message="its a message" multiple date="date" />
+
+                  <MainMessage
+                    multiple
+                    sender
+                    message=" its a message hello, its a message"
+                    date="date"
+                  />
                 </div>
               </Route>
             </>

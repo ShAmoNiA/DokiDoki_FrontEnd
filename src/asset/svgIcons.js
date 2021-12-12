@@ -327,6 +327,38 @@ const NavarGhalbSquare = ({
   );
 };
 
+const CheckIcon = ({ size = 24, fill = "gray" }) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      version="1.1"
+      width={size}
+      height={size}
+      fill={fill}
+      viewBox="0 0 24 24"
+      data-testid="check-icon"
+    >
+      <path d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z" />
+    </svg>
+  );
+};
+
+const DoubleCheckIcon = ({ size = 24, fill = "gray" }) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      version="1.1"
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill={fill}
+      data-testid="double-check-icon"
+    >
+      <path d="M0.41,13.41L6,19L7.41,17.58L1.83,12M22.24,5.58L11.66,16.17L7.5,12L6.07,13.41L11.66,19L23.66,7M18,7L16.59,5.58L10.24,11.93L11.66,13.34L18,7Z" />
+    </svg>
+  );
+};
+
 export {
   DoctorIcon,
   SickIcon,
@@ -337,4 +369,6 @@ export {
   UploadAvatar,
   CloseIcon,
   NavarGhalbSquare,
+  CheckIcon,
+  DoubleCheckIcon,
 };
