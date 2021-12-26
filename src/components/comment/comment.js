@@ -42,7 +42,7 @@ export default function commentMain({doctor_Id}) {
   
     const onChange = e => {
         setText(e.target.value)
-        console.log('Change:', e.target.value);
+        // console.log('Change:', e.target.value);
     };
   
   
@@ -66,7 +66,7 @@ export default function commentMain({doctor_Id}) {
                 } else {
                   setIn(0)
                 }
-              console.log(response);
+              // console.log(response);
             })
             .catch(function (response) {
               console.log(response);
@@ -88,7 +88,7 @@ export default function commentMain({doctor_Id}) {
     axios.get("http://185.141.107.81:1111/api/comments/"+doctorId)
     .then((response) => {
       setData(response.data.comments)
-      console.log(response)
+      // console.log(response)
     })
     .catch(() => {
       console.log("error in getting resault from server");
