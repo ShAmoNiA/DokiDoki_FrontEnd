@@ -1,5 +1,5 @@
 import React from 'react';
-import {cleanup, render, screen, fireEvent, queryByTestId} from '@testing-library/react';
+import {cleanup, render, screen, fireEvent} from '@testing-library/react';
 import Dashboard from "../components/Dashboard/Dashboard";
 import {Provider} from "react-redux";
 import store from "../redux/store";
@@ -9,7 +9,7 @@ afterEach(cleanup);
 
 describe("Edit Profile", () => {
 	let editProfileBtn = null;
-
+	// todo: uncomment skips
 	beforeAll(() => {
 		Object.defineProperty(window, 'matchMedia', {
 			writable: true,
@@ -37,6 +37,7 @@ describe("Edit Profile", () => {
 		editProfileBtn = screen.queryByText("EDIT PROFILE");
 		fireEvent.click(editProfileBtn);
 	});
+
 
 	test("edit profile button should be exist", () => {
 		expect(editProfileBtn).toBeTruthy();

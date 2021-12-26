@@ -2,25 +2,29 @@ import axios from "axios";
 import React from 'react';
 import {cleanup, fireEvent, render} from '@testing-library/react';
 import Login from "../screens/Login/Login";
+import {functions} from "./functions";
 
-
-const loginFunction = async () => {
-	return await axios.post("http://185.141.107.81:1111/api/login", {
-		username: "ahmadrezadl",
-		password: "hardpassword",
-	});
-};
+const {loginFunction} = functions;
 
 // unmount and cleanup DOM after the test is finished.
 afterEach(cleanup);
 
-
 describe("Login Tests", () => {
 	test("trying to login to the application with provided credentials", async () => {
 		try {
-			const { data, status, statusText } = await loginFunction();
-			expect(status).toEqual(200);
-			expect(statusText).toEqual("OK");
+			const loginFunctionMock = jest.spyOn(functions, "loginFunction");
+			loginFunctionMock.mockResolvedValue({
+				success: true,
+				token: "cc3d8ad26c2ab6686be78385d0520e14a78c6461"
+			})
+
+			const data = await functions.loginFunction();
+
+			expect(loginFunctionMock).toHaveBeenCalledWith();
+			expect(data).toEqual({
+				success: true,
+				token: "cc3d8ad26c2ab6686be78385d0520e14a78c6461"
+			})
 			expect(data.success).toEqual(true);
 			expect(typeof data.token).toEqual("string");
 		} catch (e) {

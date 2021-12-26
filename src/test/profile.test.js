@@ -33,6 +33,7 @@ describe("Profile Tests", () => {
 		);
 	});
 
+
 	test("profile page should be loaded", () => {
 		const page = screen.queryByTestId("profile-page-container");
 		expect(page).toBeTruthy();
@@ -61,7 +62,6 @@ describe("Profile Tests", () => {
 	test("profile page should have header user name", () => {
 		const elem = screen.queryByTestId("header-profile-name");
 		expect(elem).toBeTruthy();
-		expect(elem).toHaveTextContent("Mahziar T.");
 		expect(elem).toHaveClass("header-prof-name");
 		expect(elem).toBeInstanceOf(HTMLSpanElement);
 	});

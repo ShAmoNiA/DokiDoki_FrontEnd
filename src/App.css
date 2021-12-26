@@ -7,16 +7,8 @@ body {
 		rgba(0, 115, 255, 1) 100%
 	);
 
-	
-	/* background-position: center center;
-    background-size: 100%;
-    background-repeat: no-repeat; */
-
-
-	/* --twitter-color: rgba(97, 9, 121, 1);
-	--twitter-background: #eeeeee; */
-	/* background-repeat : no-repeat;
-	background-size: auto; */
+	--twitter-color: rgba(97, 9, 121, 1);
+	--twitter-background: #eeeeee;
 }
 
 .app {
