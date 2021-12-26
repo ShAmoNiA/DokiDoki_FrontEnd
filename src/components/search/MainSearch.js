@@ -9,7 +9,7 @@ const tabs = { search: "1", advanced: "2", tag: "3" };
 
 const tabsname = { 1: "Search", 2: "AdvancedSearch", 3: "Tags" };
 
-const SearchBaseUrl = "/search-test";
+const SearchBaseUrl = "/search";
 
 const MainSearch = ({ active = "search" }) => {
   const [activePart, setActivePart] = useState(tabs[active]);

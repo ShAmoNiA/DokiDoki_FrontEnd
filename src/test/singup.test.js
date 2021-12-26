@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import React from "react";
 import {
   AccountTick,
@@ -11,6 +11,10 @@ import {
 } from "../asset/svgIcons";
 import MainAvatar from "../components/avatar/avatar";
 import Login from "../screens/Login/Login";
+
+import { rest, setupWorker } from "msw";
+import { setupServer } from "msw/node";
+import BackendAdress from "../backend/address";
 
 test("Signup form: rendering", () => {
   render(<Login type="signup" />);
@@ -125,33 +129,36 @@ test("Signup form: dynamic sign up button  status", () => {
   expect(submitSignUp.disabled).toBe(false);
 });
 
-test("render svg icons", () => {
-  render(
-    <div>
-      <DoctorIcon />
-      <SickIcon />
-      <AccountTick />
-      <RotatePicture />
-      <UploadAvatar />
-      <CameraIcon />
-      <LoadingGif />
-    </div>
-  );
+const CheckUsrnameResponseTrue = rest.get(
+  BackendAdress + "check_username/test1",
+  (req, res, ctx) => {
+    return res(ctx.json({ exists: false }));
+  }
+);
 
-  var doctor = screen.getByTestId("doctor-icon");
-  var sick = screen.getByTestId("sick-icon");
-  var tick = screen.getByTestId("account-tick-icon");
-  var rotate = screen.getByTestId("rotate-icon");
-  var uplaod = screen.getByTestId("upload-avatar-icon");
-  var camera = screen.getByTestId("camera-icon");
-  var loading = screen.getByTestId("loading-gif-icon");
+const CheckUsrnameResponseFalse = rest.get(
+  BackendAdress + "check_username/test2",
+  (req, res, ctx) => {
+    return res(ctx.json({ exists: true }));
+  }
+);
 
-  expect(doctor).toBeInTheDocument;
-  expect(sick).toBeInTheDocument;
-  expect(tick).toBeInTheDocument;
-  expect(rotate).toBeInTheDocument;
-  expect(doctor).toBeInTheDocument;
-  expect(uplaod).toBeInTheDocument;
-  expect(camera).toBeInTheDocument;
-  expect(loading).toBeInTheDocument;
+const handlers = [CheckUsrnameResponseTrue, CheckUsrnameResponseFalse];
+
+const server = new setupServer(...handlers);
+
+server.listen();
+
+test("Signup form: check username", async () => {
+  render(<Login type="signup" />);
+
+  var username = screen.getByPlaceholderText("Username");
+
+  fireEvent.change(username, { target: { value: "test2" } });
+
+  await waitFor(() => {
+    screen.getByText("is taken");
+  });
 });
+
+server.close();

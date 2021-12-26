@@ -1,9 +1,10 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import React from "react";
+import MainChatbox from "../components/Chat/chatbox";
 import MainMessage from "../components/Chat/message";
 import { MainColors } from "../config";
 
-test("Message Component: rendering", () => {
+test("Message Component: render", () => {
   render(<MainMessage />);
 });
 
@@ -53,4 +54,44 @@ test("Message Component: Seen and not Seen in sender's messages", () => {
   var notSeenIcon = screen.getByTestId("check-icon");
 
   expect(notSeenIcon).toBeInTheDocument;
+});
+
+test("ChatBox Component: render", () => {
+  render(<MainChatbox />);
+});
+
+test("ChatBox Component: show username", () => {
+  render(<MainChatbox username="rahmani" />);
+
+  screen.getByTestId("username");
+});
+
+test("ChatBox Component: show avatar", () => {
+  render(<MainChatbox username="rahmani" />);
+
+  screen.getByTestId("avatar");
+});
+
+test("ChatBox Component: show send button", () => {
+  render(<MainChatbox username="rahmani" />);
+
+  screen.getByTestId("send-btn");
+});
+
+test("ChatBox Component: show text input", () => {
+  render(<MainChatbox username="rahmani" />);
+
+  screen.getByTestId("message-input");
+});
+
+test("ChatBox Component: scrollable div for messages", () => {
+  render(<MainChatbox username="rahmani" />);
+
+  screen.getByTestId("messages");
+});
+
+test("ChatBox Component: back button", () => {
+  render(<MainChatbox username="rahmani" />);
+
+  screen.getByTestId("back-btn");
 });

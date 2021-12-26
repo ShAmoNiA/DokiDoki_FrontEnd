@@ -12,7 +12,7 @@ export default function Nav({ openDrawer }) {
         <i
           className="bi bi-search search-icon"
           onClick={() => {
-            window.location.replace("#/search-test");
+            window.location.replace("#/search");
           }}
         ></i>
       </span>
