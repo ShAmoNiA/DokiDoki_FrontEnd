@@ -23,6 +23,8 @@ import { Home } from "@material-ui/icons";
 
 import MainSearch from "./components/search/MainSearch";
 import MainMessage from "./components/Chat/message";
+import MainChatbox from "./components/Chat/chatbox";
+import MainChatPage from "./components/Chat";
 
 const App = () => {
   return (
@@ -47,43 +49,14 @@ const App = () => {
                 <Dashboard />
               </Route>
 
-              <Route path="/search-test">
+              <Route path="/search">
                 <div style={{ overflowY: "auto", width: "100%" }}>
                   <MainSearch />
                 </div>
               </Route>
 
               <Route path="/chat-test">
-                <div
-                  style={{
-                    height: 500,
-                    width: 500,
-                    backgroundColor: "white",
-                  }}
-                >
-                  <MainMessage
-                    message="hello, its a message hello, its a message hello, its a message hello, its a message hello, its a message"
-                    date="date"
-                    sender
-                    seen
-                  />
-
-                  <MainMessage
-                    message="hello, its a message hello, its a message hello, its a message hello, its a message hello, its a message"
-                    date="date"
-                    seen
-                    sender
-                  />
-
-                  <MainMessage message="its a message" multiple date="date" />
-
-                  <MainMessage
-                    multiple
-                    sender
-                    message=" its a message hello, its a message"
-                    date="date"
-                  />
-                </div>
+                <MainChatPage />
               </Route>
             </>
           )}

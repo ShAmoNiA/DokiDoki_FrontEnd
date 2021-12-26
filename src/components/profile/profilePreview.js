@@ -104,7 +104,7 @@ const ProfilePreview = ({ username, setUsername }) => {
                   console.log(
                     "tag=> " + t + " must be searched instead of this log"
                   );
-                  window.open("#/search-test/Tags/" + t, "_blank");
+                  window.open("#/search/Tags/" + t, "_blank");
 
                   // بستن مودال
                   // تغییر کتگوری به کتگوری کلیک شده

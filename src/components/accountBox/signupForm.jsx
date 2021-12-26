@@ -188,9 +188,7 @@ export function SignupForm(props) {
           errors.confirmPassword = false;
           return {};
         } else {
-
-         var errstr = "";
-
+          var errstr = "";
 
           margin = 0;
           if (confirmPassword.length > 0)
@@ -373,7 +371,7 @@ export function SignupForm(props) {
             }}
           >
             As Doctor
-          </div>{" "}
+          </div>
           {DoctorIcon({ fill: doctorColor })}
         </div>
         <div

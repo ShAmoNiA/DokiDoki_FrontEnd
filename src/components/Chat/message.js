@@ -12,7 +12,10 @@ const messageColor = {
     backgroundColor: MainColors.ContrastedPurple,
     borderBottomLeftRadius: 0,
   },
-  false: { backgroundColor: MainColors.Gray, borderBottomRightRadius: 0 },
+  false: {
+    backgroundColor: MainColors.Gray,
+    borderBottomRightRadius: 0,
+  },
 };
 
 const multipleMessage = {
@@ -41,7 +44,7 @@ const MainMessage = ({
           </div>
         ) : (
           <div>
-            <CheckIcon style={{ marginRight: 4 }} size={15} />
+            <CheckIcon style={{ marginRight: 4 }} fill="black" size={15} />
           </div>
         )}
       </div>
@@ -65,6 +68,8 @@ const MainMessage = ({
             color: "white",
             borderRadius: 16,
             ...messageColor[sender],
+            textAlign: "left",
+            fontSize: 18,
           }}
         >
           {message}
@@ -76,10 +81,11 @@ const MainMessage = ({
           style={{
             marginLeft: 8,
             marginRight: 8,
-            color: MainColors.Gray,
+            color: "black",
             opacity: 0.5,
             display: "flex",
             alignItems: "flex-end",
+            fontSize: 10,
           }}
         >
           {CreateSeen()}

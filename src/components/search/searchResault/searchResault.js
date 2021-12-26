@@ -189,7 +189,7 @@ const SearchResault = ({
       >
         <div style={{ marginBottom: 16 }}>
           <NavarGhalbSquare size={150} />
-        </div>{" "}
+        </div>
         {type === "1" || type === "2" ? (
           <div>Search Something for Resault</div>
         ) : (
