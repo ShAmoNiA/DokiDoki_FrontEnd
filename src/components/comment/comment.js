@@ -8,8 +8,9 @@ import 'antd/dist/antd.css'
 import moment from 'moment';
 import './comment.css';
 
-export default function App({doctor_Id}) {
+export default function commentMain({doctor_Id}) {
 
+  var token = localStorage.getItem("token");
   const [dataFromIn,setIn] = useState(0)
   const [data,setData] = useState([]);
   const doctorId = 2
@@ -41,7 +42,7 @@ export default function App({doctor_Id}) {
   
     const onChange = e => {
         setText(e.target.value)
-        console.log('Change:', e.target.value);
+        // console.log('Change:', e.target.value);
     };
   
   
@@ -54,7 +55,7 @@ export default function App({doctor_Id}) {
             url: "http://185.141.107.81:1111/api/new_comment",
             data: formData,
             headers: {
-                Authorization: "token"
+              Authorization: `token ${token}`
               }
           })
             .then(function (response) {
@@ -65,7 +66,7 @@ export default function App({doctor_Id}) {
                 } else {
                   setIn(0)
                 }
-              console.log(response);
+              // console.log(response);
             })
             .catch(function (response) {
               console.log(response);
@@ -73,7 +74,7 @@ export default function App({doctor_Id}) {
         }
   
     return(
-        <div>
+        <div data-testid="CommentSub" >
         <TextArea showCount value={text} maxLength={100} style={{ height: 120 }} onChange={onChange} />
         <Button onClick={clickHandler} htmlType="submit" type="primary">
             Add Comment
@@ -82,11 +83,12 @@ export default function App({doctor_Id}) {
         
     )
   };  
+
   useEffect(() => {
     axios.get("http://185.141.107.81:1111/api/comments/"+doctorId)
     .then((response) => {
       setData(response.data.comments)
-      console.log(response)
+      // console.log(response)
     })
     .catch(() => {
       console.log("error in getting resault from server");
@@ -95,7 +97,7 @@ export default function App({doctor_Id}) {
   },[dataFromIn]);
 
   return (
-    <div>
+    <div data-testid="commentMain" >
       {data.map((s)=>(
         <CommentStrunt authorName ={s.writer_name} contentText={s.text} data={s.date}/>
       ))}
