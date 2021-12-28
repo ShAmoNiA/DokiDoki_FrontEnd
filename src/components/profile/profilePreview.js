@@ -8,6 +8,7 @@ import GetProfilePreviewDetailsRequest from "../../backend/User/Profile/getProfi
 import MainAvatar from "../avatar/avatar";
 import { Modal } from "antd";
 import { useHistory } from "react-router";
+import CommentMain from "../comment/comment";
 
 const fontColorItem = "gray";
 const fontColorValue = "black";
@@ -64,6 +65,7 @@ const ProfilePreview = ({ username, setUsername }) => {
             console.log("error in getting profile details");
           } else {
             setProfileDetails(data);
+            console.log(data);
           }
         },
       });
@@ -437,6 +439,19 @@ const ProfilePreview = ({ username, setUsername }) => {
     >
       <div style={{ height: 400, overflow: "auto", marginTop: 25 }}>
         {CreateContent()}
+
+        <div style={{ ...BottomBorder }}></div>
+        <div
+          style={{
+            ...NameText,
+            textAlign: "-webkit-center",
+            fontWeight: "bold",
+          }}
+        >
+          Comments
+        </div>
+
+        <CommentMain doctor_Id={2} />
       </div>
     </Modal>
   );
