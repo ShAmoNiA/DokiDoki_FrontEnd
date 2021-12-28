@@ -39,4 +39,8 @@ _Search resaults_: (Using Doctor Card)
 
 ---
 
-**Version4 => Visit (appoinment), chat, comment, rating freatures**
+Version4 => Visit (appoinment), chat, comment, rating freatures
+
+---
+
+**Version5 => Visit (appoinment), chat, depths and debug**
