@@ -25,6 +25,7 @@ import MainSearch from "./components/search/MainSearch";
 import MainMessage from "./components/Chat/message";
 import MainChatbox from "./components/Chat/chatbox";
 import MainChatPage from "./components/Chat";
+import MainAddTag from "./components/profile/addTag";
 
 const App = () => {
   return (
@@ -57,6 +58,9 @@ const App = () => {
 
               <Route path="/chat-test">
                 <MainChatPage />
+              </Route>
+              <Route path="/addtag-test">
+                <MainAddTag />
               </Route>
             </>
           )}

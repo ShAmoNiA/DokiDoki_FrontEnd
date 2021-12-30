@@ -6,10 +6,7 @@ const GetProfileDetailsRequest = async ({ datacaller }) => {
 
   var tokenn = "token " + token;
   await MainAxiosRequest()
-    .get("profile_preview", {
-      params: {
-        username: "rahmani",
-      },
+    .get("my_profile_preview", {
       headers: {
         Authorization: tokenn,
       },
