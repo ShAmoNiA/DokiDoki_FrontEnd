@@ -1,5 +1,10 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import GetChatList from "../../backend/User/chat/getChatList";
+import GetOldChat from "../../backend/User/chat/getOldChat";
+import GetProfileDetailsRequest from "../../backend/User/Profile/getProfileDetails";
 import { MainColors } from "../../config";
+import useMessages from "../customHook/useMessage";
 import useWindowDimensions from "../customHook/useWindowDimensions";
 import MainChatbox from "./chatbox";
 import MainChatList from "./chatlist";
@@ -24,82 +29,32 @@ const calcWidth = ({ windowWidth, activePart }) => {
   };
 };
 
-const testusers = [
-  {
-    username: "rahmani01",
-    picture:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUeriYGQjOOecu23m2gqPoc1_Dz5Phrr4uKWwNMnwyQxUYDgCUqOHiwv0Jph1MU5Kzf0g&usqp=CAU",
-  },
-  {
-    username: "rahmani02",
-    picture:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUeriYGQjOOecu23m2gqPoc1_Dz5Phrr4uKWwNMnwyQxUYDgCUqOHiwv0Jph1MU5Kzf0g&usqp=CAU",
-  },
-  {
-    username: "rahmani03",
-    picture:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUeriYGQjOOecu23m2gqPoc1_Dz5Phrr4uKWwNMnwyQxUYDgCUqOHiwv0Jph1MU5Kzf0g&usqp=CAU",
-  },
-  {
-    username: "rahmani04",
-    picture:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUeriYGQjOOecu23m2gqPoc1_Dz5Phrr4uKWwNMnwyQxUYDgCUqOHiwv0Jph1MU5Kzf0g&usqp=CAU",
-  },
-  {
-    username: "rahmani05",
-    picture:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUeriYGQjOOecu23m2gqPoc1_Dz5Phrr4uKWwNMnwyQxUYDgCUqOHiwv0Jph1MU5Kzf0g&usqp=CAU",
-  },
-  {
-    username: "rahmani06",
-    picture:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUeriYGQjOOecu23m2gqPoc1_Dz5Phrr4uKWwNMnwyQxUYDgCUqOHiwv0Jph1MU5Kzf0g&usqp=CAU",
-  },
-  {
-    username: "rahmani07",
-    picture:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUeriYGQjOOecu23m2gqPoc1_Dz5Phrr4uKWwNMnwyQxUYDgCUqOHiwv0Jph1MU5Kzf0g&usqp=CAU",
-  },
-  {
-    username: "rahmani08",
-    picture:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUeriYGQjOOecu23m2gqPoc1_Dz5Phrr4uKWwNMnwyQxUYDgCUqOHiwv0Jph1MU5Kzf0g&usqp=CAU",
-  },
-  {
-    username: "rahmani09",
-    picture:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUeriYGQjOOecu23m2gqPoc1_Dz5Phrr4uKWwNMnwyQxUYDgCUqOHiwv0Jph1MU5Kzf0g&usqp=CAU",
-  },
-  {
-    username: "rahmani10",
-    picture:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUeriYGQjOOecu23m2gqPoc1_Dz5Phrr4uKWwNMnwyQxUYDgCUqOHiwv0Jph1MU5Kzf0g&usqp=CAU",
-  },
-  {
-    username: "ahmadrezadl",
-    picture:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUeriYGQjOOecu23m2gqPoc1_Dz5Phrr4uKWwNMnwyQxUYDgCUqOHiwv0Jph1MU5Kzf0g&usqp=CAU",
-  },
-
-  {
-    username: "	rahmaniii",
-    picture:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUeriYGQjOOecu23m2gqPoc1_Dz5Phrr4uKWwNMnwyQxUYDgCUqOHiwv0Jph1MU5Kzf0g&usqp=CAU",
-  },
-
-  {
-    username: "shayan",
-    picture:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUeriYGQjOOecu23m2gqPoc1_Dz5Phrr4uKWwNMnwyQxUYDgCUqOHiwv0Jph1MU5Kzf0g&usqp=CAU",
-  },
-];
-
 const MainChatPage = () => {
-  const [users, setUsers] = useState(testusers);
+  const [users, setUsers] = useState([]);
 
-  const [selectedUserChat, setSelectedUserChat] = useState("rahmani");
+  const [selectedUserChat, setSelectedUserChat] = useState("");
 
-  const [activePart, setActivePart] = useState("chatbox");
+  const [activePart, setActivePart] = useState("chatlist");
+
+  const [userDetails, setUserDetails] = useState({});
+
+  const [chatSockets, setChatSockets] = useState([]);
+
+  const [onlineUsers, setOnlineUsers] = useState([]);
+
+  const [unreadUsers, setUnreadUsers] = useState([]);
+
+  useEffect(() => {
+    GetProfileDetailsRequest({
+      datacaller: (details) => {
+        setUserDetails(details);
+      },
+    });
+  }, []);
+
+  useEffect(() => {
+    setUnreadUsers(unreadUsers.filter((f) => f !== selectedUserChat));
+  }, [unreadUsers.length]);
 
   const { height, width } = useWindowDimensions();
   var { chatBoxWidth, chatListWidth, activeback, activechat, activechatlist } =
@@ -107,6 +62,42 @@ const MainChatPage = () => {
       windowWidth: width,
       activePart: activePart,
     });
+
+  useEffect(() => {
+    GetChatList({
+      datacaller: (chats) => {
+        var userss = Object.values(chats);
+        setUsers(userss);
+
+        console.log(chats);
+        setUnreadUsers(
+          userss.map((m) => {
+            if (m.has_new_message) return m.partner_username;
+          })
+        );
+
+        // ساخت سوکت برای هر کدوم از یوزر ها
+
+        var sockets = [];
+        for (var i = 0; i < userss.length; i++) {
+          var url = `ws://185.141.107.81:1111/ws/chat_socket/${
+            userss[i].partner_username
+          }/${localStorage.getItem("token")}/`;
+
+          var socket = new WebSocket(url);
+
+          var chat = {
+            socket: socket,
+            username: userss[i].partner_username,
+            url: url,
+          };
+          sockets = [...sockets, chat];
+        }
+
+        setChatSockets(sockets);
+      },
+    });
+  }, []);
 
   return (
     <div
@@ -138,6 +129,10 @@ const MainChatPage = () => {
             active={activechatlist}
             height={height - 8}
             users={users}
+            onlineUsers={onlineUsers}
+            setOnlineUsers={setOnlineUsers}
+            unreadUsers={unreadUsers}
+            setUnreadUsers={setUnreadUsers}
           />
         </div>
         <div
@@ -151,6 +146,7 @@ const MainChatPage = () => {
           }}
         >
           <MainChatbox
+            isdoctor={userDetails.is_doctor}
             back={() => {
               setActivePart("chatlist");
               setSelectedUserChat("");
@@ -159,6 +155,14 @@ const MainChatPage = () => {
             activeback={activeback}
             active={activechat}
             chatformheight={height - 122}
+            chatsockets={chatSockets}
+            onlineUsers={onlineUsers}
+            setOnlineUsers={setOnlineUsers}
+            unreadUsers={unreadUsers}
+            setUnreadUsers={setUnreadUsers}
+            profilepicture={
+              Object.values(users).filter((f) => f === selectedUserChat)[0]
+            }
           />
         </div>
       </div>
