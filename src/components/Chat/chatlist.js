@@ -14,6 +14,10 @@ const MainChatList = ({
   active,
   height,
   users,
+  onlineUsers,
+  setOnlineUsers,
+  unreadUsers,
+  setUnreadUsers,
 }) => {
   if (!active) return <></>;
   return (
@@ -59,12 +63,21 @@ const MainChatList = ({
         {users.map((u) => {
           return (
             <MainChatListCard
-              key={u.username}
+              key={u.partner_username}
               onclick={() => {
-                selectusername({ username: u.username });
+                selectusername({ username: u.partner_username });
+                setUnreadUsers(
+                  unreadUsers.filter((f) => f !== u.partner_username)
+                );
               }}
               profilepicture={u.picture}
-              username={u.username}
+              username={u.partner_username}
+              isonline={
+                onlineUsers.filter((f) => f === u.partner_username).length === 1
+              }
+              lastmessage={
+                unreadUsers.filter((f) => f === u.partner_username).length === 1
+              }
             />
           );
         })}

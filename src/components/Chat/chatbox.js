@@ -9,95 +9,10 @@ import ProfilePreview from "../profile/profilePreview";
 import "./antInput.css";
 import backGroundImage from "../../asset/chatback.png";
 import MainMessage from "./message";
-
-const testmessages = {
-  1: {
-    id: 1,
-    message:
-      "im sender hi its a message hi its a message hi its a message hi its a message hi its a message hi its a message",
-    date: "its a date",
-    issender: true,
-    seen: true,
-  },
-  2: {
-    id: 2,
-    message: "hi its a message hi its a message hi its a message hi its a m",
-    date: "its a date",
-    issender: false,
-    seen: true,
-  },
-  3: {
-    id: 3,
-    message: "hi its a message",
-    date: "its a date",
-    issender: false,
-    seen: true,
-  },
-  4: {
-    id: 4,
-    message:
-      "hi its a message  a message  a message  a message  a message a message a message a message",
-    date: "its a date",
-    issender: false,
-    seen: true,
-  },
-  5: {
-    id: 5,
-    message: "hi its a message",
-    date: "its a date",
-    issender: false,
-    seen: true,
-  },
-  6: {
-    id: 6,
-    message: "hi its a message",
-    date: "its a date",
-    issender: false,
-    seen: true,
-  },
-  7: {
-    id: 7,
-    message: "hi its a message",
-    date: "its a date",
-    issender: true,
-    seen: true,
-  },
-  8: {
-    id: 8,
-    message: "hi its a message",
-    date: "its a date",
-    issender: true,
-    seen: true,
-  },
-  9: {
-    id: 9,
-    message: "hi its a message",
-    date: "its a date",
-    issender: true,
-    seen: true,
-  },
-  10: {
-    id: 10,
-    message: "hi its a message",
-    date: "its a date",
-    issender: true,
-    seen: false,
-  },
-  11: {
-    id: 11,
-    message: "hi its a message",
-    date: "its a date",
-    issender: false,
-    seen: true,
-  },
-  12: {
-    id: 12,
-    message: "hi its a message",
-    date: "its a date",
-    issender: true,
-    seen: false,
-  },
-};
+import useMessagesSocket from "../customHook/useMessage";
+import GetOldChat from "../../backend/User/chat/getOldChat";
+import { BackendImageAdress } from "../../backend/address";
+import { m } from "framer-motion";
 
 const { TextArea } = Input;
 
@@ -107,11 +22,29 @@ const MainChatbox = ({
   activeback,
   active,
   chatformheight,
+  isdoctor,
+  chatsockets = [],
+  onlineUsers,
+  setOnlineUsers,
+  unreadUsers,
+  setUnreadUsers,
+  profilepicture,
 }) => {
   const [selectedUser, setSelectedUser] = useState(""); // برای پروفایل پریویو
-  const [messages, setMessages] = useState(Object.values(testmessages));
+  const [messages, setMessages] = useState([]);
 
   const [message, setMessage] = useState("");
+
+  const [incommingMessage, setIncommingMessage] = useState({
+    id: 0,
+    message: "",
+    date: "",
+    issender: false,
+    seen: false,
+    username: "",
+  });
+
+  const [chatSocket, setChatSocket] = useState("");
 
   const messageEnd = useRef();
 
@@ -121,14 +54,120 @@ const MainChatbox = ({
       else messageEnd.current.scrollIntoView({ behavior: "auto" });
   };
 
+  // معرفی سوکت های ساخته شده توی کامپوننت والد
+  useEffect(() => {
+    for (var v = 0; v < chatsockets.length; v++) {
+      var socket = chatsockets[v].socket;
+
+      socket.onopen = (e) => {
+        console.log(url);
+        var url = e.target.url;
+        var v = chatsockets.filter((f) => f.url === url);
+
+        console.log(url);
+        console.log(v[0].username);
+
+        var usernamee = v[0].username;
+        console.log("connected to user: " + usernamee);
+      };
+
+      socket.onmessage = (e) => {
+        var url = e.target.url;
+        var v = chatsockets.filter((f) => f.url === url);
+        var usernamee = v[0].username;
+
+        var message = JSON.parse(e.data);
+
+        console.log(message);
+        if (message.type === "partner_status") {
+          if (message.partner_is_online) {
+            // کاربر یوزر رو انلاین کن
+            if (onlineUsers.filter((f) => f === usernamee).length === 0)
+              setOnlineUsers([usernamee, ...onlineUsers]);
+
+            console.log(usernamee + "is online");
+          } else {
+            console.log(usernamee + "gone offline");
+            setOnlineUsers(onlineUsers.filter((f) => f !== usernamee));
+          }
+        }
+
+        if (message.type === "chat_message") {
+          if (!(message.is_sender_doctor === isdoctor)) {
+            // پیام خونده نشده یوزر پیام خونده نشده داره
+            if (unreadUsers.filter((f) => f === usernamee).length === 0)
+              setUnreadUsers([usernamee, ...unreadUsers]);
+
+            console.log("new message from " + usernamee);
+          }
+
+          // باید صفحه رو اپدیت کنیم
+          // قبلش باید بررسی بشه که توی صفحه چت هستیم یا نه
+          // توی افکت پیام دریافتی این بررسی رو انجام میدیم
+          setIncommingMessage({
+            username: usernamee,
+            date: message.date,
+            is_sender_doctor: message.is_sender_doctor,
+            id: message.date,
+            text: message.message,
+            seen: message.seen,
+          });
+        }
+      };
+    }
+  }, [chatsockets.length]);
+
+  // اینجا باید وب سوکت جدید ساخته شه
+  // و چتای قدیمی لود بشن
+  useEffect(() => {
+    if (username !== "") {
+      GetOldChat({
+        username: username,
+        datacaller: (msgs) => {
+          setMessages(
+            Object.values(msgs).sort((a, b) => {
+              if (a.id < b.id) return -1;
+              else return 1;
+            })
+          );
+        },
+      });
+    }
+  }, [username]);
+
+  // اپدیت کردن پیام ها
+  useEffect(() => {
+    if (incommingMessage.username === username)
+      if (incommingMessage.id !== 0)
+        setMessages([...messages, incommingMessage]);
+  }, [incommingMessage]);
+
   // اسکرول تا پایین صفحه وقتی یوزر توی صفحه چت تغییر کنه
   useEffect(() => {
-    ScrollToBottom({ smooth: false });
+    if (active) if (username !== "") ScrollToBottom({ smooth: false });
   }, [username]);
 
   useEffect(() => {
-    ScrollToBottom({ smooth: true });
-  }, [message.length]);
+    if (active) if (username !== "") ScrollToBottom({ smooth: true });
+  }, [messages.length]);
+
+  useEffect(() => {
+    console.log(incommingMessage);
+    if (messages.length > 0)
+      if (!(incommingMessage.is_sender_doctor === isdoctor))
+        if (incommingMessage.username === username) {
+          console.log("seen");
+          setMessages(
+            messages.map((m) => {
+              return { ...m, seen: true };
+            })
+          );
+        }
+  }, [messages.length]);
+
+  console.log("username:" + username);
+
+  console.log(BackendImageAdress + profilepicture);
 
   if (!active) {
     return <></>;
@@ -192,7 +231,7 @@ const MainChatbox = ({
           {username}
           <Avatar
             style={{ marginLeft: 4 }}
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUeriYGQjOOecu23m2gqPoc1_Dz5Phrr4uKWwNMnwyQxUYDgCUqOHiwv0Jph1MU5Kzf0g&usqp=CAU"
+            src={BackendImageAdress + profilepicture}
           />
         </div>
       </div>
@@ -217,10 +256,10 @@ const MainChatbox = ({
             return (
               <MainMessage
                 key={m.id}
-                date={m.date}
-                message={m.message}
+                date={m.date.split(".")[0]}
+                message={m.text}
                 seen={m.seen}
-                sender={m.issender}
+                sender={isdoctor === m.is_sender_doctor}
               />
             );
           })}
@@ -253,17 +292,9 @@ const MainChatbox = ({
           <IconButton
             onClick={() => {
               if (message !== "") {
-                var d = new Date();
-                setMessages([
-                  ...messages,
-                  {
-                    id: messages.length + 1,
-                    issender: true,
-                    date: d.getFullYear() + "-" + d.getDate(),
-                    message: message,
-                    seen: false,
-                  },
-                ]);
+                chatsockets
+                  .filter((f) => f.username === username)[0]
+                  .socket.send(`{ "message": "${message}"}`);
                 setMessage("");
               }
             }}
