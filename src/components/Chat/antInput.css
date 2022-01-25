@@ -1,0 +1,58 @@
+.messageinput:hover {
+  border: 1px solid rgb(110, 82, 110);
+}
+
+.messageinput:focus {
+  border-color: rgb(110, 82, 110);
+  outline: 0;
+  -webkit-box-shadow: 0 0 0 2px rgba(110, 82, 110, 0.2);
+  box-shadow: 0 0 0 2px rgba(110, 82, 110, 0.2);
+}
+
+.avatar:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.menu-item {
+  padding: 10px;
+  padding-bottom: 14px;
+  cursor: pointer;
+  color: black;
+  font-size: 2rem;
+  border: 1px solid rgb(94, 28, 124);
+  border-radius: 10px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.19);
+}
+.menu-item:hover {
+  box-shadow: 0px 2px 20px rgb(94, 28, 124);
+  transition: all 400ms ease-in-out;
+}
+
+.menu-item-logout {
+  padding: 10px;
+  padding-bottom: 14px;
+  cursor: pointer;
+  color: black;
+  font-size: 2rem;
+  border: 1px solid rgb(255, 0, 0);
+  border-radius: 10px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.19);
+}
+.menu-item-logout:hover {
+  box-shadow: 0px 2px 20px rgb(255, 0, 0);
+  transition: all 400ms ease-in-out;
+}
+
+.chat-list-card:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+
+.ant-input::placeholder {
+  color: rgba(94, 28, 124, 0.4);
+}
