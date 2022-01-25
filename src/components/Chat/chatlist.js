@@ -38,19 +38,35 @@ const MainChatList = ({
         }}
       >
         <span>
-          <i className="menu-item" onClick={() => {}}>
+          <i
+            className="menu-item"
+            onClick={() => {
+              window.location.replace("#/dashboard");
+            }}
+          >
             <SettingIcon fill="rgb(94, 28, 124)" />
           </i>
         </span>
 
         <span>
-          <i className="menu-item" onClick={() => {}}>
+          <i
+            className="menu-item"
+            onClick={() => {
+              window.location.replace("");
+            }}
+          >
             <HomeIcon fill="rgb(94, 28, 124)" />
           </i>
         </span>
 
         <span>
-          <i className="menu-item-logout" onClick={() => {}}>
+          <i
+            className="menu-item-logout"
+            onClick={() => {
+              localStorage.setItem("token", "");
+              window.location.reload();
+            }}
+          >
             <PowerIcon fill="rgb(255,0,0)" />
           </i>
         </span>

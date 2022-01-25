@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import CategorySelecter from "./category/categorySelecter";
-import { Tabs } from "antd";
+import { Button, Tabs } from "antd";
 import SearchResault from "./searchResault/searchResault";
 import { Link, useHistory } from "react-router-dom";
 import SearchBar from "../SearchBar/SearchBar";
+import { HomeIcon } from "../../asset/svgIcons";
 
 const tabs = { search: "1", advanced: "2", tag: "3" };
 
@@ -100,6 +101,15 @@ const MainSearch = ({ active = "search" }) => {
         }}
         activeKey={activePart}
         centered
+        tabBarExtraContent={
+          <Button
+            onClick={() => {
+              window.location.replace("");
+            }}
+          >
+            Home
+          </Button>
+        }
       >
         <Tabs.TabPane tab={<span>Search</span>} key={tabs.search}>
           {CreateCommenSearch()}
@@ -122,6 +132,8 @@ const MainSearch = ({ active = "search" }) => {
         minWidth: "100%",
         paddingLeft: 8,
         paddingRight: 8,
+        height: "100%",
+        overflowY: "auto",
       }}
     >
       {CreateTabs()}

@@ -51,7 +51,7 @@ const App = () => {
               </Route>
 
               <Route path="/search">
-                <div style={{ overflowY: "auto", width: "100%" }}>
+                <div style={{ width: "100%" }}>
                   <MainSearch />
                 </div>
               </Route>

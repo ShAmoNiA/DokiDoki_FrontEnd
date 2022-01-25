@@ -5,6 +5,8 @@ import { useSelector, useDispatch } from "react-redux";
 import axios from "../../helper/axiosInstance";
 import { PhoneOutlined } from "@ant-design/icons";
 import { colors } from "@material-ui/core";
+import MainAddTag from "../profile/addTag";
+import MainAvatar from "../avatar/avatar";
 
 const TYPE = "patient";
 export default function ObjectPanel() {
@@ -171,11 +173,7 @@ export default function ObjectPanel() {
         <div className="object-info">
           <div className="object-personal-info">
             <div>
-              <img
-                className="info-profile"
-                src={"http://185.141.107.81:1111" + user.profile_picture_url}
-                alt="profile"
-              />
+              <MainAvatar size={200} />
             </div>
             <div>
               <span className="profile-name">{user.fullname}</span>
@@ -218,16 +216,8 @@ export default function ObjectPanel() {
             </Button>
           </div>
         </div>
-        <ul className="object-menu">
-          <li className="object-menu1">Today's consultation</li>
-          <li className="object-menu2">Previous</li>
-          <li className="object-menu3">Surgeries/Procedures</li>
-          <li className="object-menu4">Clinical Notes</li>
-          <li className="object-menu5">Tests</li>
-          <li className="object-menu6">Diagnosis</li>
-          <li className="object-menu7">Medication List</li>
-          <li className="object-menu8">Vaccination</li>
-        </ul>
+
+        <MainAddTag />
       </div>
     </>
   );
