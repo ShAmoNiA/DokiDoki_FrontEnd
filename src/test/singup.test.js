@@ -12,8 +12,6 @@ import {
 import MainAvatar from "../components/avatar/avatar";
 import Login from "../screens/Login/Login";
 
-import { rest, setupWorker } from "msw";
-import { setupServer } from "msw/node";
 import BackendAdress from "../backend/address";
 
 test("Signup form: rendering", () => {
@@ -129,6 +127,7 @@ test("Signup form: dynamic sign up button  status", () => {
   expect(submitSignUp.disabled).toBe(false);
 });
 
+/*
 const CheckUsrnameResponseTrue = rest.get(
   BackendAdress + "check_username/test1",
   (req, res, ctx) => {
@@ -162,3 +161,6 @@ test("Signup form: check username", async () => {
 });
 
 server.close();
+
+
+*/

@@ -56,6 +56,9 @@ const ProfilePreview = ({ username, setUsername }) => {
 
   const historyy = useHistory();
 
+  console.log("salam");
+  console.log(profileDetails);
+
   useEffect(() => {
     if (mUsername !== "")
       GetProfilePreviewDetailsRequest({
@@ -83,6 +86,27 @@ const ProfilePreview = ({ username, setUsername }) => {
       } else setMUsername("");
     } else setMUsername("");
   }, [username]);
+
+  const CreateComments = () => {
+    if (profileDetails.is_doctor === false) return <></>;
+    else
+      return (
+        <>
+          <div style={{ ...BottomBorder }}></div>
+          <div
+            style={{
+              ...NameText,
+              textAlign: "-webkit-center",
+              fontWeight: "bold",
+            }}
+          >
+            Comments
+          </div>
+
+          <CommentMain doctor_Id={profileDetails.id} />
+        </>
+      );
+  };
 
   const CreateExpertisesTags = () => {
     var tags = profileDetails.expertise_tags + "";
@@ -440,18 +464,7 @@ const ProfilePreview = ({ username, setUsername }) => {
       <div style={{ height: 400, overflow: "auto", marginTop: 25 }}>
         {CreateContent()}
 
-        <div style={{ ...BottomBorder }}></div>
-        <div
-          style={{
-            ...NameText,
-            textAlign: "-webkit-center",
-            fontWeight: "bold",
-          }}
-        >
-          Comments
-        </div>
-
-        <CommentMain doctor_Id={2} />
+        {CreateComments()}
       </div>
     </Modal>
   );

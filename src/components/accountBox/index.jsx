@@ -3,8 +3,9 @@ import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { LoginForm } from "./loginForm";
 import { SignupForm } from "./signupForm";
+import { ForgetPasswordForm } from "./forgetPasswordForm";
 import SignupSuccessForm from "./signupSuccessForm";
-
+import ForgetPasswordSuccessForm from './forgetPasswordSuccess';
 import { motion } from "framer-motion";
 import { AccountContext } from "./accountContext";
 
@@ -133,6 +134,13 @@ export function AccountBox(props) {
     }, 400);
   };
 
+  const switchToForgetPassword = () => {
+    playExpandingAnimation();
+    setTimeout(() => {
+      history.replace("/forgetpassword");
+    }, 400);
+  }
+
   const switchToSignUpSuccess = () => {
     playExpandingAnimation();
     setTimeout(() => {
@@ -140,10 +148,19 @@ export function AccountBox(props) {
     }, 400);
   };
 
+  const switchToForgetPasswordSuccess = () => {
+    playExpandingAnimation();
+    setTimeout(() => {
+      setActive("forget_password_success")
+    }, 400);
+  }
+
   const contextValue = {
     switchToSignup,
     switchToSignin,
+    switchToForgetPassword,
     switchToSignUpSuccess,
+    switchToForgetPasswordSuccess,
   };
 
   var BackDropStyle = {};
@@ -185,6 +202,13 @@ export function AccountBox(props) {
               <SmallText>Please sign-up to continue!</SmallText>
             </HeaderContainer>
           )}
+          {active === "forgetpassword" && (
+            <HeaderContainer style={{ marginBottom: 70 }}>
+              <HeaderText>Forget</HeaderText>
+              <HeaderText>Password ?</HeaderText>
+              <SmallText>Please enter your email</SmallText>
+            </HeaderContainer>
+          )}
           {active === "success" && (
             <HeaderContainer style={{ marginBottom: 50 }}>
               <HeaderText>Account</HeaderText>
@@ -196,6 +220,8 @@ export function AccountBox(props) {
           {active === "signin" && <LoginForm />}
           {active === "signup" && <SignupForm />}
           {active === "success" && <SignupSuccessForm />}
+          {active === "forgetpassword" && <ForgetPasswordForm />}
+          {active === "forget_password_success" && <ForgetPasswordSuccessForm />}
         </InnerContainer>
       </BoxContainer>
     </AccountContext.Provider>

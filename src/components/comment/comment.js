@@ -7,11 +7,13 @@ import "antd/dist/antd.css";
 import moment from "moment";
 import "./comment.css";
 
-export default function CommentMain({ doctor_Id = 2 }) {
+export default function CommentMain({ doctor_Id }) {
   var token = localStorage.getItem("token");
   const [dataFromIn, setIn] = useState(0);
   const [data, setData] = useState([]);
-  const doctorId = 2;
+
+  var doctorId = doctor_Id;
+  if (doctor_Id === undefined) doctorId = "";
 
   function CommentStrunt({ authorName, contentText, data }) {
     return (
@@ -60,7 +62,7 @@ export default function CommentMain({ doctor_Id = 2 }) {
           // console.log(response);
         })
         .catch(function (response) {
-          console.log(response);
+          console.log(response.response);
         });
     }
 
@@ -91,19 +93,21 @@ export default function CommentMain({ doctor_Id = 2 }) {
         console.log("error in getting resault from server");
         setData([]);
       });
-  }, [dataFromIn]);
+  }, [dataFromIn, doctor_Id]);
 
-  return (
-    <div style={{ marginRight: 4 }} data-testid="commentMain">
-      {data.map((s) => (
-        <CommentStrunt
-          authorName={s.writer_name}
-          contentText={s.text}
-          data={s.date}
-          key={s.writer_name + s.date + s.text}
-        />
-      ))}
-      <CommentSub doctorId={doctor_Id} />
-    </div>
-  );
+  if (doctorId === "") return <div> loaing comments </div>;
+  else
+    return (
+      <div style={{ marginRight: 4 }} data-testid="commentMain">
+        {data.map((s) => (
+          <CommentStrunt
+            authorName={s.writer_name}
+            contentText={s.text}
+            data={s.date}
+            key={s.writer_name + s.date + s.text}
+          />
+        ))}
+        <CommentSub doctorId={doctor_Id} />
+      </div>
+    );
 }

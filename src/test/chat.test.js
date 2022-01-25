@@ -63,35 +63,41 @@ test("ChatBox Component: render", () => {
 test("ChatBox Component: show username", () => {
   render(<MainChatbox username="rahmani" />);
 
-  screen.getByTestId("username");
+  screen.findByText("rahmani");
 });
 
 test("ChatBox Component: show avatar", () => {
   render(<MainChatbox username="rahmani" />);
 
-  screen.getByTestId("avatar");
+  screen.findByTestId("avatar");
 });
 
 test("ChatBox Component: show send button", () => {
   render(<MainChatbox username="rahmani" />);
 
-  screen.getByTestId("send-btn");
+  screen.findByTestId("send-btn");
 });
 
 test("ChatBox Component: show text input", () => {
   render(<MainChatbox username="rahmani" />);
 
-  screen.getByTestId("message-input");
+  screen.findByTestId("message-input");
 });
 
 test("ChatBox Component: scrollable div for messages", () => {
   render(<MainChatbox username="rahmani" />);
 
-  screen.getByTestId("messages");
+  screen.findByTestId("messages");
 });
 
-test("ChatBox Component: back button", () => {
+test("ChatBox Component: send picture", () => {
   render(<MainChatbox username="rahmani" />);
 
-  screen.getByTestId("back-btn");
+  screen.getByTestId("send-picture");
+});
+
+test("ChatBox Component: send file", () => {
+  render(<MainChatbox username="rahmani" />);
+
+  screen.getByTestId("send-file");
 });

@@ -277,15 +277,24 @@ const MainChatbox = ({
           }}
           key="footer"
         >
-          <TextArea
+          <Input
             style={{ marginRight: 4 }}
             className="messageinput scrollbar placeholder"
             color={MainColors.Gray}
-            autoSize={{ minRows: 1, maxRows: 2 }}
             placeholder="message..."
             value={message}
             onChange={(e) => {
               setMessage(e.target.value);
+            }}
+            onKeyPress={(e) => {
+              if (e.key === "Enter") {
+                if (message !== "") {
+                  chatsockets
+                    .filter((f) => f.username === username)[0]
+                    .socket.send(`{ "message": "${message}"}`);
+                  setMessage("");
+                }
+              }
             }}
           />
 

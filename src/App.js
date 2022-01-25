@@ -42,6 +42,9 @@ const App = () => {
           <Route path="/Signup" exact>
             <Login type="signup" />
           </Route>
+          <Route path="/forgetpassword" exact>
+            <Login type="forgetpassword" />
+          </Route>
           {!auth.checkLogin() ? (
             <Redirect to={"/login"} />
           ) : (
